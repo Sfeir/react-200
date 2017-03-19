@@ -1,0 +1,15 @@
+.AppBar {
+  background-color: #0168AB;
+  background-image: url('./AppBar.background.png');
+  background-repeat: no-repeat;
+  background-position: right;
+  color: white;
+  margin-bottom: 10px;
+  padding: 0 15px;  
+  display: flex;
+  align-items: center;
+}
+
+.AppBar-logo {
+  height: 40px;
+}

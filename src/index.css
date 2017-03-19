@@ -1,5 +1,10 @@
+@import url(~materialize-css/bin/materialize.css);
+@import url(~material-design-icons/iconfont/material-icons.css);
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  background-color: #fafafa;
+}
+
+a {
+  color: #337ab7;
 }
