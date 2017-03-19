@@ -9,3 +9,37 @@
               0 6px 30px 5px rgba(0, 0, 0, 0.12),
               0 8px 10px -5px rgba(0, 0, 0, 0.3);
 }
+
+.Card .card-avatar {
+  float: right;
+  border-radius: 50%;
+  width: 128px;
+  height: 128px;
+}
+
+.Card .card-title {
+  margin-bottom: 15px;
+}
+
+.Card .card-subtitle {
+  font-size: 14px;
+  line-height: initial;
+  color: #777;
+}
+
+.Card .card-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;  
+}
+
+.Card .card-info > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 300;
+}
+
+.Card .card-info > i.material-icons {
+  color: #777;
+  margin-right: 5px;
+}

@@ -1,14 +1,12 @@
 import React from 'react';
 import './Card.css';
 
-const Card = (props) => (
+const Card = ({children}) => (
   <section className="Card card">
     <div className="card-content">
-      <div className="card-title">
-        {props.title}
-      </div>
+      {children}
     </div>
-  </section>
+  </section>  
 );
 
 export default Card;
