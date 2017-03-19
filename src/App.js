@@ -1,16 +1,18 @@
 import React from 'react';
 import './App.css';
 
+import AppBar from './components/AppBar';
+import Card from './components/Card';
+
 const MESSAGE = 'React-200 @ SFEIR';
 
 const App = () => (
   <div className="App">
     <header>
-      insérez votre AppBar ici
+      <AppBar />
     </header>
     <main>
-      insérez votre Card ici
-      et passez "{MESSAGE}" comme prop
+      <Card title={MESSAGE} />
     </main>
   </div>
 );
