@@ -9,11 +9,11 @@ const Card = ({children}) => (
   </section>  
 );
 
-Card.Avatar = ({photoUrl, altText}) => (
+const Avatar = ({photoUrl, altText}) => (
   <img className="card-avatar" src={photoUrl} alt={altText} />
 );
 
-Card.Title = ({mainTitle, subTitle}) => (
+const Title = ({mainTitle, subTitle}) => (
   <div className="card-title">
     <div>
       {mainTitle}
@@ -24,11 +24,15 @@ Card.Title = ({mainTitle, subTitle}) => (
   </div>
 );
 
-Card.Info = ({icon, desc, children}) =>  (
+const Info = ({icon, desc, children}) =>  (
   <div className="card-info">
     <i className="material-icons" title={desc || icon}>{icon}</i>
     <span>{children}</span>
   </div>
 );
+
+Card.Avatar = Avatar;
+Card.Title = Title;
+Card.Info = Info;
 
 export default Card;
