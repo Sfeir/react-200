@@ -10,8 +10,9 @@ function nextPerson({ current, people }) {
   };
 }
 
-const Fab = ({ kind, large }) => (
-  <a className={`btn-default btn-floating waves-effect waves-light ${large && 'btn-large'}`}>
+const Fab = ({ kind, large, onClick }) => (
+  <a className={`btn-default btn-floating waves-effect waves-light ${large && 'btn-large'}`}
+     onClick={onClick}>
     <i className="material-icons">{kind}</i>
   </a>
 );
@@ -25,12 +26,8 @@ class Discover extends Component {
     }
   }
 
-  componentDidMount() {
-    this.interval = setInterval(() => this.setState(nextPerson), 2000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
+  onNextClick() {
+    this.setState(nextPerson);
   }
   
   render() {
@@ -45,7 +42,7 @@ class Discover extends Component {
           <Fab kind="skip_previous" />
           <Fab kind={this.interval ? 'pause' : 'play_arrow'} large />
         */}
-          <Fab kind="skip_next" large />
+          <Fab kind="skip_next" large onClick={() => this.onNextClick()} />
         </div>
       </div>
     );
