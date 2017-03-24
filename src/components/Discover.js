@@ -9,11 +9,11 @@ import Person from './Person';
 const succ = (current, min, max) => (current === max) ? min : current + 1;
 const pred = (current, min, max) => (current === min) ? max : current - 1;
 
-const showNext = ({current, people}) => ({
+const showNext = ({ current, people }) => ({
   current: succ(current, 0, people.length - 1)
 });
 
-const showPrev = ({current, people}) => ({
+const showPrev = ({ current, people }) => ({
   current: pred(current, 0, people.length - 1)
 });
 
@@ -40,7 +40,7 @@ const Cards = ({ person }) => (
   </div>  
 );
 
-const Fabs = ({playing, next, prev, play, pause}) => (
+const Fabs = ({ playing, next, prev, play, pause }) => (
   <div className="fab-container">
     <Fab kind="skip_previous" onClick={prev} />
     { playing
@@ -63,6 +63,10 @@ class Discover extends Component {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
+
   showNextPerson = () => {
     this.setState(showNext);
   };
@@ -72,6 +76,7 @@ class Discover extends Component {
   };
 
   play = () => {
+    clearInterval(this.intervalId);
     this.intervalId = setInterval(this.showNextPerson, 2000);
     this.setState(showNext);
     this.setState(play);

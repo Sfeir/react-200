@@ -2,11 +2,11 @@ import React from 'react';
 import './AppBar.css';
 import logo from './AppBar.logo.svg';
 
-const AppBar = () => (
+const AppBar = ({show, toggleShow}) => (
   <nav className="AppBar">
     <img className="AppBar-logo" src={logo} aria-label="people" alt="People" />
     <hr/>
-    <a href="#">show all</a>
+    <a href="#" onClick={toggleShow}>{show}</a>
   </nav>
 );
 
