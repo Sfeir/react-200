@@ -1,11 +1,8 @@
 import React from 'react';
 import './App.css';
-import PEOPLE from './data/people.json';
 
 import AppBar from './components/AppBar';
-import Person from './components/Person';
-
-const randomPerson = PEOPLE[Math.floor(Math.random() * PEOPLE.length)];
+import Discover from './components/Discover';
 
 const App = () => (
   <div className="App">
@@ -13,7 +10,7 @@ const App = () => (
       <AppBar />
     </header>
     <main>
-      <Person {...randomPerson} />
+      <Discover />
     </main>
   </div>
 );
