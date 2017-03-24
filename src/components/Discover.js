@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
+import './Discover.css';
 import PEOPLE from '../data/people.json';
 
 import Person from './Person';
 
-function cyclePerson({ current, people }) {
+function nextPerson({ current, people }) {
   return {
     current: (current + 1) % people.length
   };
 }
+
+const Fab = ({ kind, large }) => (
+  <a className={`btn-default btn-floating waves-effect waves-light ${large && 'btn-large'}`}>
+    <i className="material-icons">{kind}</i>
+  </a>
+);
 
 class Discover extends Component {
   constructor(props) {
@@ -19,7 +26,7 @@ class Discover extends Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => this.setState(cyclePerson), 2000);
+    this.interval = setInterval(() => this.setState(nextPerson), 2000);
   }
 
   componentWillUnmount() {
@@ -29,10 +36,20 @@ class Discover extends Component {
   render() {
     const { people, current } = this.state;
     return (
-      <Person {...people[current]} />
+      <div className="Discover">
+        <div className="card-container">
+          <Person {...people[current]} />
+        </div>
+        <div className="fab-container">
+        {/*
+          <Fab kind="skip_previous" />
+          <Fab kind={this.interval ? 'pause' : 'play_arrow'} large />
+        */}
+          <Fab kind="skip_next" large />
+        </div>
+      </div>
     );
   }
 }
 
-export { cyclePerson };
 export default Discover;
