@@ -1,25 +1,43 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Card from './Card';
 
-const Person = ({person}) => (
+const Person = ({
+  firstname,
+  lastname,
+  photo,
+  entity,
+  email,
+  phone,
+  manager
+}) => (
   <Card>
-    <Card.Avatar photoUrl={person.photo} altText={`photo of ${person.firstname}`} />
+    <Card.Avatar photoUrl={photo} altText={`photo of ${firstname}`} />
     <Card.Title
-      mainTitle={<a href="#">{person.firstname} {person.lastname}</a>}
-      subTitle={person.entity}
+      mainTitle={<a href="#">{firstname} {lastname}</a>}
+      subTitle={entity}
     />
     <Card.Info icon="email">
-      <a href={`mailto:${person.email}`}>{person.email}</a>
+      <a href={`mailto:${email}`}>{email}</a>
     </Card.Info>
     <Card.Info icon="phone">
-      <a href={`tel:${person.phone}`}>{person.phone}</a>
+      <a href={`tel:${phone}`}>{phone}</a>
     </Card.Info>
-    { person.manager && (
+    { manager && (
       <Card.Info icon="supervisor_account" desc="manager">
-        <a href="#">{person.manager}</a>
+        <a href="#">{manager}</a>
       </Card.Info>
     )}
   </Card>  
 );
+
+Person.propTypes = {
+  firstname: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
+  photo: PropTypes.string.isRequired,
+  entity: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  manager: PropTypes.string
+}
 
 export default Person;

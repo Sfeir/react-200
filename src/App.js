@@ -13,7 +13,7 @@ const App = () => (
       <AppBar />
     </header>
     <main>
-      <Person person={randomPerson} />
+      <Person {...randomPerson} />
     </main>
   </div>
 );
