@@ -1,3 +1,18 @@
+.App header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.App main {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 80px;
+  padding-bottom: 15px;
+}
+
 .App .card-container {
   display: flex;
   justify-content: center;

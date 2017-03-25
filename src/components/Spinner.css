@@ -1,0 +1,9 @@
+.Spinner {
+  position: absolute;
+  top: calc(50% - 20px);
+  left: calc(50% - 20px);
+}
+
+.Spinner .spinner-layer {
+  border-color: #0168AB;
+}
