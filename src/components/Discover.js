@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import './Discover.css';
-import PEOPLE from '../data/people.json';
-
 import Person from './Person';
+import './Discover.css';
 
 // state management
 
 const succ = (current, min, max) => (current === max) ? min : current + 1;
 const pred = (current, min, max) => (current === min) ? max : current - 1;
 
-const showNext = ({ current, people }) => ({
+const showNext = ({ current }, { people }) => ({
   current: succ(current, 0, people.length - 1)
 });
 
-const showPrev = ({ current, people }) => ({
+const showPrev = ({ current }, { people }) => ({
   current: pred(current, 0, people.length - 1)
 });
 
@@ -57,7 +55,6 @@ class Discover extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      people: PEOPLE,
       current: 0,
       playing: false
     }
@@ -88,7 +85,8 @@ class Discover extends Component {
   };
   
   render() {
-    const { people, current, playing } = this.state;
+    const { people } = this.props;
+    const { current, playing } = this.state;
     return (
       <div className="Discover">
         <Cards person={people[current]} />
