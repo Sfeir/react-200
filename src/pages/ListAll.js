@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Person from '../components/Person';
+import PersonCard from '../components/PersonCard';
 import SearchInput from '../components/SearchInput';
 
 // utils
@@ -42,7 +42,7 @@ class ListAll extends Component {
           { people
             .filter(filterPerson(search))
             .map(person => 
-              <Person {...person} key={person.id} />
+              <PersonCard {...person} key={person.id} />
             )
           }
         </div>

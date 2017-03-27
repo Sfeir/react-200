@@ -43,3 +43,12 @@
   color: #777;
   margin-right: 5px;
 }
+
+.Card .card-action > a {
+  cursor: pointer;
+  user-select: none;
+}
+
+.Card .card-action > .btn {
+  margin-right: 24px;
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Person from '../components/Person';
+import PersonCard from '../components/PersonCard';
 import Fab from '../components/Fab';
 
 // state management
@@ -27,7 +27,7 @@ const pause = () => ({
 
 const Cards = ({ person }) => (
   <div className="card-container">
-    <Person {...person} />
+    <PersonCard {...person} />
   </div>  
 );
 

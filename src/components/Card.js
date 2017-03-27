@@ -1,12 +1,17 @@
 import React from 'react';
 import './Card.css';
 
-const Card = ({children}) => (
+const Card = ({actions, children}) => (
   <section className="Card card">
     <div className="card-content">
       {children}
     </div>
-  </section>  
+    { actions && actions.length &&
+      <div className="card-action">
+        { actions }
+      </div>
+    }
+  </section>
 );
 
 const Avatar = ({photoUrl, altText}) => (
@@ -24,7 +29,7 @@ const Title = ({mainTitle, subTitle}) => (
   </div>
 );
 
-const Info = ({icon, desc, children}) =>  (
+const Info = ({icon, desc, children}) => (
   <div className="card-info">
     <i className="material-icons" title={desc || icon}>{icon}</i>
     <span>{children}</span>

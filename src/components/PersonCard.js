@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import { Link } from 'react-router-dom';
 import Card from './Card';
 
-const Person = ({
+const PersonCard = ({
   id,
   firstname,
   lastname,
@@ -11,9 +11,12 @@ const Person = ({
   email,
   phone,
   manager,
-  managerId
+  managerId,
+  onEdit
 }) => (
-  <Card>
+  <Card actions={ onEdit && [
+    <a href="#" onClick={onEdit} key="edit">edit</a>
+  ]}>
     <Card.Avatar photoUrl={photo} altText={`photo of ${firstname}`} />
     <Card.Title
       mainTitle={<Link to={`/person/${id}`}>{firstname} {lastname}</Link>}
@@ -33,7 +36,7 @@ const Person = ({
   </Card>  
 );
 
-Person.propTypes = {
+PersonCard.propTypes = {
   id: PropTypes.string.isRequired,
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
@@ -42,7 +45,8 @@ Person.propTypes = {
   email: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
   manager: PropTypes.string,
-  managerId: PropTypes.string
+  managerId: PropTypes.string,
+  onEdit: PropTypes.func
 }
 
-export default Person;
+export default PersonCard;
