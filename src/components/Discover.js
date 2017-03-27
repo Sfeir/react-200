@@ -39,7 +39,7 @@ const Cards = ({ person }) => (
 );
 
 const Fabs = ({ playing, next, prev, play, pause }) => (
-  <div className="fab-container">
+  <div className="control-container">
     <Fab kind="skip_previous" onClick={prev} />
     { playing
     ? <Fab kind="pause" large onClick={pause} />

@@ -1,0 +1,26 @@
+.SearchInput {
+  width: 460px;
+}
+
+.SearchInput .material-icons.prefix {
+  top: calc(1.5rem - 12px);
+  color: #9e9e9e;
+}
+
+.SearchInput.input-field input[type=text] {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.SearchInput.input-field input[type=text]:focus + label {
+  color: #0168AB;
+}
+
+.SearchInput.input-field .prefix.active {
+  color: #0168AB;
+}
+
+.SearchInput.input-field input[type=text]:focus {
+  border-bottom: 1px solid #0168AB;
+  box-shadow: 0 1px 0 0 #0168AB;
+}
