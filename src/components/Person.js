@@ -1,12 +1,13 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Card from './Card';
 
 const Person = ({ person }) => (
   <Card>
     <Card.Avatar photoUrl={person.photo} altText={`photo of ${person.firstname}`} />
     <Card.Title
-      mainTitle={<a href={`/person/${person.id}`}>{person.firstname} {person.lastname}</a>}
+      mainTitle={<Link to={`/person/${person.id}`}>{person.firstname} {person.lastname}</Link>}
       subTitle={person.entity}
     />
     <Card.Info icon="email">
@@ -15,9 +16,9 @@ const Person = ({ person }) => (
     <Card.Info icon="phone">
       <a href={`tel:${person.phone}`}>{person.phone}</a>
     </Card.Info>
-    { person.managerId && (
+    { person.manager && person.managerId && (
       <Card.Info icon="supervisor_account" desc="manager">
-        <a href={`/person/${person.managerId}`}>{person.manager}</a>
+        <Link to={`/person/${person.managerId}`}>{person.manager}</Link>
       </Card.Info>
     )}
   </Card>  

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Person from './Person';
-import SearchInput from './SearchInput';
+import Person from '../components/Person';
+import SearchInput from '../components/SearchInput';
 
 // utils
 

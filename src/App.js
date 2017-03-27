@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
+import Discover from './pages/Discover';
+import ListAll from './pages/ListAll';
+import Person from './pages/Person';
+
 import AppBar from './components/AppBar';
-import Discover from './components/Discover';
-import ListAll from './components/ListAll';
 import Spinner from './components/Spinner';
 
 
@@ -38,6 +40,9 @@ class App extends Component {
               } />
               <Route path="/discover" render={() =>
                 <Discover people={people} />
+              } />
+              <Route path="/person/:id" render={({match}) =>
+                <Person person={people.find(person => person.id === match.params.id)} />
               } />
               <Redirect to="/all" />
             </Switch>
