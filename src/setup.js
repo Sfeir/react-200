@@ -11,7 +11,7 @@ const activatedServiceWorker = new Promise(resolve => {
 });
 
 export async function setupVirtualServer() {
-  const swReg = await navigator.serviceWorker.register('virtual-server.js');
+  const swReg = await navigator.serviceWorker.register('/virtual-server.js');
   window.onbeforeunload = () => void swReg.unregister();
   return await activatedServiceWorker;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Person from './Person';
-import './Discover.css';
+import Person from '../components/Person';
+import Fab from '../components/Fab';
 
 // state management
 
@@ -24,13 +24,6 @@ const pause = () => ({
 });
 
 // subcomponents
-
-const Fab = ({ kind, large, onClick }) => (
-  <a className={`btn-default btn-floating waves-effect waves-light ${large && 'btn-large'}`}
-     onClick={onClick}>
-    <i className="material-icons">{kind}</i>
-  </a>
-);
 
 const Cards = ({ person }) => (
   <div className="card-container">

@@ -1,19 +1,22 @@
 import React, {PropTypes} from 'react';
+import { Link } from 'react-router-dom';
 import Card from './Card';
 
 const Person = ({
+  id,
   firstname,
   lastname,
   photo,
   entity,
   email,
   phone,
-  manager
+  manager,
+  managerId
 }) => (
   <Card>
     <Card.Avatar photoUrl={photo} altText={`photo of ${firstname}`} />
     <Card.Title
-      mainTitle={<a href="#">{firstname} {lastname}</a>}
+      mainTitle={<Link to={`/person/${id}`}>{firstname} {lastname}</Link>}
       subTitle={entity}
     />
     <Card.Info icon="email">
@@ -22,22 +25,24 @@ const Person = ({
     <Card.Info icon="phone">
       <a href={`tel:${phone}`}>{phone}</a>
     </Card.Info>
-    { manager && (
+    { manager && managerId && (
       <Card.Info icon="supervisor_account" desc="manager">
-        <a href="#">{manager}</a>
+        <Link to={`/person/${managerId}`}>{manager}</Link>
       </Card.Info>
     )}
   </Card>  
 );
 
 Person.propTypes = {
+  id: PropTypes.string.isRequired,
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
   entity: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
-  manager: PropTypes.string
+  manager: PropTypes.string,
+  managerId: PropTypes.string
 }
 
 export default Person;
