@@ -19,11 +19,15 @@
   border: 2px solid transparent;
 }
 
-.AppBar a:hover {
+.AppBar a:hover, .AppBar a.active {
   border-bottom-color: white;
 }
 
 .AppBar hr {
-  flex-grow: 1;
+  width: 15px;
   visibility: hidden;
+}
+
+.AppBar hr.grow {
+  flex-grow: 1;
 }
