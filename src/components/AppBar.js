@@ -1,12 +1,15 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './AppBar.css';
 import logo from './AppBar.logo.svg';
 
-const AppBar = ({show, toggleShow}) => (
+const AppBar = () => (
   <nav className="AppBar">
     <img className="AppBar-logo" src={logo} aria-label="people" alt="People" />
     <hr className="grow"/>
-    <a onClick={toggleShow}>{show}</a>
+    <NavLink to="/all">show all</NavLink>
+    <hr/>
+    <NavLink to="/discover">discover</NavLink>
   </nav>
 );
 
