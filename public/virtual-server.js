@@ -15,11 +15,30 @@ const mapToArray = map => (
   .map(key => map[key])
 );
 
-let people = (
-  fetch('people.json')
-  .then(res => res.json())
-  .then(arrayToMap('id'))
-);
+const fetchInitial = async () => {
+  const result = await fetch('people.json');
+  const people = await result.json();
+  return arrayToMap('id')(people);
+}
+
+let people = fetchInitial();
+
+const updatePerson = async (person) => {
+  const current = await people;
+  return Object.assign({}, current, {[person.id]: person});
+}
+
+const savePerson = async (request) => {
+  const id = request.parameters.id;
+  const person = await request.json();
+  
+  if (person.id !== id) {
+    return new Response(undefined, { status: 404, statusText: 'not found' });
+  }
+  
+  people = updatePerson(person);
+  return new Response(undefined, { status: 204, statusText: 'no content' });
+}
 
 // response utils
 
@@ -42,6 +61,7 @@ const jsonResponse = bodyPromise => (
 // setup routes
 
 worker.get('/api/people', () => jsonResponse(people.then(mapToArray)));
+worker.put('/api/people/:id', savePerson);
 
 // prevent unknown api calls
 worker.use('/api/*', (req, res) => (

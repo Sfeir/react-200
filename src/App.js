@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
+import { fetchPeople, savePerson } from './service/people';
+
 import Discover from './pages/Discover';
 import ListAll from './pages/ListAll';
 import Person from './pages/Person';
@@ -14,17 +16,35 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // shown: LISTALL,
       people: null
     };
   }
 
   componentDidMount() {
-    fetch('api/people')
-    .then(res => res.json())
-    .then(people => this.setState({ people }));
+    this.fetchPeople();
   }
-  
+
+  fetchPeople() {
+    return (
+      fetchPeople()
+      .then(people => this.setState({ people }))
+      .catch(e => {
+        console.error('could not fetch people :(', e);
+      })
+    );
+  }
+
+  savePerson(person) {
+    return (
+      savePerson(person)
+      .then(() => this.fetchPeople())
+      .catch(e => {
+        console.error('could not save person :(', e);
+        throw e;
+      })
+    );
+  }
+
   render() {
     const { people } = this.state;
     return (

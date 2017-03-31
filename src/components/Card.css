@@ -17,8 +17,8 @@
   height: 128px;
 }
 
-.Card .card-title {
-  margin-bottom: 15px;
+.Card.card .card-content .card-title {
+  margin-bottom: 24px;
 }
 
 .Card .card-subtitle {
