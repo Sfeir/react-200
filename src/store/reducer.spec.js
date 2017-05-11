@@ -9,16 +9,23 @@ describe('reducer', () => {
   ]);
 
   const emptyState = freeze({
-    people: []
+    people: [],
+    search: ''
   });
 
   const populatedState = freeze({
-    people: testPeople
+    people: testPeople,
+    search: ''
   });
   
   it('should initialize state with people set to an empty array', () => {
     const actualState = reducer(undefined, {});
-    expect(actualState).toEqual(emptyState);
+    expect(actualState.people).toEqual(emptyState.people);
+  });
+
+  it('should initialize state with search set to an empty string', () => {
+    const actualState = reducer(undefined, {});
+    expect(actualState.search).toEqual(emptyState.search);
   });
 
   it('should set people array on PEOPLE_RECEIVED', () => {
@@ -41,6 +48,7 @@ describe('reducer', () => {
     
     const {people: [first, , third]} = populatedState;
     expect(actualState).toEqual({
+      ...populatedState,
       people: [first, action.person, third]
     });    
   });
@@ -53,7 +61,21 @@ describe('reducer', () => {
 
     const actualState = reducer(populatedState, action);
     expect(actualState).toEqual({
+      ...populatedState,
       people: [action.person].concat(testPeople)
     });
   });
+
+  it('should replace search with the string in SEARCH_CHANGED action', () => {
+    const action = {
+      type: 'SEARCH_CHANGED',
+      search: 'test'
+    };
+
+    const actualState = reducer(populatedState, action);
+    expect(actualState).toEqual({
+      ...populatedState,
+      search: 'test'
+    })
+  })
 });
