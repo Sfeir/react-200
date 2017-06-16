@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import PEOPLE from './data/people.json';
+
 import AppBar from './components/AppBar';
 import Discover from './components/Discover';
 import ListAll from './components/ListAll';
@@ -30,8 +32,8 @@ class App extends Component {
         </header>
         <main>
           { shown === LISTALL
-          ? <ListAll />
-          : <Discover />
+          ? <ListAll people={PEOPLE} />
+          : <Discover people={PEOPLE} />
           }
         </main>
       </div>
