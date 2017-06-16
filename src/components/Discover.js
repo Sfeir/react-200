@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import './Discover.css';
-import PEOPLE from '../data/people.json';
 
 import Person from './Person';
 
-function nextPerson({ current, people }) {
-  return {
-    current: (current + 1) % people.length
-  };
-}
+const setNext = ({ current }, { people }) => ({
+  current: (current + 1) % people.length
+});
 
 const Fab = ({ kind, large }) => (
   <a className={`btn-default btn-floating waves-effect waves-light ${large && 'btn-large'}`}>
@@ -20,13 +17,12 @@ class Discover extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      people: PEOPLE,
       current: 0
     }
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => this.setState(nextPerson), 2000);
+    this.interval = setInterval(() => this.setState(setNext), 2000);
   }
 
   componentWillUnmount() {
@@ -34,18 +30,23 @@ class Discover extends Component {
   }
   
   render() {
-    const { people, current } = this.state;
+    const { people } = this.props;
+    const { current } = this.state;    
     return (
       <div className="Discover">
         <div className="card-container">
-          <Person {...people[current]} />
+          <Person person={people[current]} />
         </div>
         <div className="fab-container">
-        {/*
-          <Fab kind="skip_previous" />
-          <Fab kind={this.interval ? 'pause' : 'play_arrow'} large />
-        */}
           <Fab kind="skip_next" large />
+        {/*
+          bonus: add these Fabs too
+          and figure out how to switch between pause and play
+          hint: you can interpolate any JS expression
+          <Fab kind="skip_previous" />
+          <Fab kind="play_arrow" />
+          <Fab kind="pause" />
+        */}
         </div>
       </div>
     );
