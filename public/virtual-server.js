@@ -1,67 +1,73 @@
 /* global importScripts, ServiceWorkerWare */
+/* global arrayToMap, mapToArray, jsonResponse, emptyResponse */
 
 importScripts('sww.js');
+importScripts('utils.js');
 const worker = new ServiceWorkerWare();
 
+
 // setup state
-
-const arrayToMap = property => array => (
-  array
-  .reduce((map, item) => Object.assign(map, { [item[property]]: item }), {})
-);
-
-const mapToArray = map => (
-  Object.keys(map)
-  .map(key => map[key])
-);
-
+ 
 const fetchInitial = async () => {
   const result = await fetch('people.json');
   const people = await result.json();
   return arrayToMap('id')(people);
 }
 
-let people = fetchInitial();
+let state = fetchInitial();
 
-const updatePerson = async (person) => {
-  const current = await people;
-  return Object.assign({}, current, {[person.id]: person});
+const findPerson = async (id) => {
+  const people = await state;
+  const person = people[id];
+  if (person === undefined) throw new Error("not found");
+  return person;
 }
 
-const savePerson = async (request) => {
-  const id = request.parameters.id;
-  const person = await request.json();
-  
-  if (person.id !== id) {
-    return new Response(undefined, { status: 404, statusText: 'not found' });
+const updateOrInsertPerson = (person) => {
+  state = state.then(people =>
+    Object.assign({}, people, {[person.id]: person})
+  );
+}
+
+
+// request handlers
+
+const getPeople = async () => {
+  const people = await state;
+  const peopleArray = mapToArray(people);
+  return jsonResponse(peopleArray);
+}
+
+const getPerson = async (req) => {
+  try {
+    const person = await findPerson(req.parameters.id);
+    return jsonResponse(person);
+  } catch (e) {
+    return emptyResponse(404);
   }
-  
-  people = updatePerson(person);
-  return new Response(undefined, { status: 204, statusText: 'no content' });
 }
 
-// response utils
+const patchPerson = async (req) => {
+  try {
+    const [person, patch] = await Promise.all([
+      findPerson(req.parameters.id),
+      req.json()
+    ]);
+    if (patch.id !== undefined && patch.id !== person.id) throw new Error("bad request");
+    const updatedPerson = Object.assign({}, person, patch);
+    updateOrInsertPerson(updatedPerson);
+    return emptyResponse(204);
+  } catch (e) {
+    return emptyResponse(400);
+  }  
+}
 
-const createJsonResponse = body => (
-  new Response(JSON.stringify(body), {
-    headers: { 'Content-Type': 'application/json' }
-  })
-);
-
-const simulateLatency = body => (
-  new Promise(resolve => setTimeout(() => resolve(body), 300))
-);
-
-const jsonResponse = bodyPromise => (
-  bodyPromise
-  .then(simulateLatency)
-  .then(createJsonResponse)
-);
 
 // setup routes
 
-worker.get('/api/people', () => jsonResponse(people.then(mapToArray)));
-worker.put('/api/people/:id', savePerson);
+worker.get('/api/people', getPeople);
+worker.get('/api/people/:id', getPerson);
+worker.patch('/api/people/:id', patchPerson);
 
 // prevent unknown api calls
 worker.use('/api/*', (req, res) => (

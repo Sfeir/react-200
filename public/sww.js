@@ -15,7 +15,7 @@ function Router(options) {
 }
 
 Router.prototype.ALL_METHODS = 'all';
-Router.prototype.methods = ['get', 'post', 'put', 'delete', 'head',
+Router.prototype.methods = ['get', 'post', 'put', 'patch', 'delete', 'head',
   Router.prototype.ALL_METHODS];
 
 /**
