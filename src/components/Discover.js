@@ -1,12 +1,9 @@
 import React from 'react';
-import PEOPLE from '../data/people.json';
 
 import Person from './Person';
 
-const randomPerson = PEOPLE[Math.floor(Math.random() * PEOPLE.length)];
-
-const Discover = () => (
-  <Person {...randomPerson} />
+const Discover = ({ people }) => (
+  <Person person={people[Math.floor(Math.random() * people.length)]} />
 );
 
 export default Discover;
