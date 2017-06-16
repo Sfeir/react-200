@@ -3,15 +3,20 @@
 // this has nothing to do with React ;)
 
 const activatedServiceWorker = new Promise(resolve => {
-  navigator.serviceWorker.oncontrollerchange = function() {
-    this.controller.onstatechange = function() {
-      this.state === 'activated' && resolve(this);
+  const controller = navigator.serviceWorker.controller;
+  if (controller) {
+    resolve(controller);
+  } else {
+    navigator.serviceWorker.oncontrollerchange = function() {
+      this.controller.onstatechange = function() {
+        this.state === 'activated' && resolve(this);
+      };
     };
-  };
+  }
 });
 
 export async function setupVirtualServer() {
-  const swReg = await navigator.serviceWorker.register('virtual-server.js');
-  window.onbeforeunload = () => void swReg.unregister();
+  /* const swReg = */await navigator.serviceWorker.register('/virtual-server.js');
+  // window.onbeforeunload = () => void swReg.unregister();
   return await activatedServiceWorker;
 }
