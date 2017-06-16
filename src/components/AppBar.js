@@ -6,7 +6,7 @@ const AppBar = () => (
   <nav className="AppBar">
     <img className="AppBar-logo" src={logo} aria-label="people" alt="People" />
     <hr/>
-    <a href="#">show all</a>
+    <a>show all</a>
   </nav>
 );
 
