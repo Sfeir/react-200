@@ -7,12 +7,12 @@ import './Discover.css';
 const succ = (current, min, max) => (current === max) ? min : current + 1;
 const pred = (current, min, max) => (current === min) ? max : current - 1;
 
-const showNext = ({ current }, { people }) => ({
-  current: succ(current, 0, people.length - 1)
+const setNext = ({ current }, { people }) => ({
+  current: succ(current, 1, people.length)
 });
 
-const showPrev = ({ current }, { people }) => ({
-  current: pred(current, 0, people.length - 1)
+const setPrev = ({ current }, { people }) => ({
+  current: pred(current, 1, people.length)
 });
 
 const play = () => ({
@@ -32,13 +32,7 @@ const Fab = ({ kind, large, onClick }) => (
   </a>
 );
 
-const Cards = ({ person }) => (
-  <div className="card-container">
-    <Person {...person} />
-  </div>  
-);
-
-const Fabs = ({ playing, next, prev, play, pause }) => (
+const Fabs = ({playing, next, prev, play, pause}) => (
   <div className="control-container">
     <Fab kind="skip_previous" onClick={prev} />
     { playing
@@ -55,27 +49,22 @@ class Discover extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: 0,
+      current: 1,
       playing: false
     }
   }
 
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-  }
-
   showNextPerson = () => {
-    this.setState(showNext);
+    this.setState(setNext);
   };
   
   showPreviousPerson = () => {
-    this.setState(showPrev);
+    this.setState(setPrev);
   };
 
   play = () => {
-    clearInterval(this.intervalId);
     this.intervalId = setInterval(this.showNextPerson, 2000);
-    this.setState(showNext);
+    this.showNextPerson();
     this.setState(play);
   };
 
@@ -83,13 +72,19 @@ class Discover extends Component {
     clearInterval(this.intervalId);
     this.setState(pause);
   };
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
   
   render() {
     const { people } = this.props;
     const { current, playing } = this.state;
     return (
       <div className="Discover">
-        <Cards person={people[current]} />
+        <div className="card-container">
+          <Person person={people[current - 1]} />
+        </div>  
         <Fabs
           playing={playing}
           next={this.showNextPerson}
