@@ -10,7 +10,7 @@ class Person extends Component {
     return (
       <div className="card-container">
         { person
-        ? <PersonCard {...person} onEdit={this.onEdit} />
+        ? <PersonCard person={person} onEdit={this.onEdit} />
         : "not found :("
         }
       </div>

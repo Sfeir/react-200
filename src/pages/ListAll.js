@@ -4,18 +4,14 @@ import SearchInput from '../components/SearchInput';
 
 // utils
 
-const filterPerson = search => person => {
-  if (!search) {
-    return true;
-  } else {
-    const re = new RegExp(search, 'i');
-    return re.test(person.firstname) || re.test(person.lastname);
-  }
+const filterPerson = search => {
+  const re = new RegExp(search, 'i');
+  return person => re.test(person.firstname) || re.test(person.lastname);
 };
 
 // state management
 
-const searchChanged = value => ({ search }) => ({
+const searchChanged = value => () => ({
   search: value || ''
 });
 
@@ -42,7 +38,7 @@ class ListAll extends Component {
           { people
             .filter(filterPerson(search))
             .map(person => 
-              <PersonCard {...person} key={person.id} />
+              <PersonCard person={person} key={person.id} />
             )
           }
         </div>
