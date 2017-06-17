@@ -8,7 +8,7 @@ import Formsy from 'formsy-react';
 
 import { configureStore } from './store';
 import { setupVirtualServer } from './setup';
-import App from './App';
+import App from './App.container';
 import './index.css';
 
 const startApp = () => {
