@@ -1,4 +1,5 @@
 import React from 'react';
+import { HOC as withFormsyProps } from 'formsy-react';
 
 const idForName = (name) => `person-form-${name}`;
 
@@ -31,8 +32,26 @@ const Input = ({
   </div>
 );
 
-// write a higher order function
-// so you can apply the formsy HOC
-// don't change Input
+const adaptForFormsyProps = (input) => {
+  return ({
+    name,
+    type,
+    label,
+    getValue,
+    setValue,
+    isFormDisabled,
+    isValid,
+    getErrorMessage
+  }) => input({
+    name: name,
+    type: type,
+    label: label,
+    value: getValue(),
+    onChange: e => setValue(e.target.value),
+    disabled: isFormDisabled(),
+    isInvalid: !isValid(),
+    errorMessage: getErrorMessage()
+  });
+};
 
-export default Input;
+export default withFormsyProps(adaptForFormsyProps(Input));

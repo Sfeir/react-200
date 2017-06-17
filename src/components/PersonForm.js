@@ -1,70 +1,51 @@
 import React, { Component } from 'react';
 import { Form } from 'formsy-react';
+import { Prompt } from 'react-router-dom';
 import Card from './Card';
 import Input from './Input';
-
-const personPropertyChanged = (key, val) => ({ form }) => ({
-  form: {...form, [key]: val},
-  valid: !!val
-});
 
 class PersonForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: {
-        firstname: props.person.firstname,
-        lastname: props.person.lastname,
-        entity: props.person.entity,
-        email: props.person.email,
-        phone: props.person.phone
-      },
       saving: false,
-      valid: true
+      valid: true,
+      dirty: false,
+      title: `${props.person.firstname} ${props.person.lastname}`
     }
   }
   
-  onSubmit_old = () => {
+  onSubmit = (model, reset) => {
     this.setState({ saving: true });
-    this.props.onSave(this.state.form)
+    this.props.onSave(model)
     .then(success => {
       if (!success) {
         this.setState({ saving: false });
         alert('could not update person :(');
+        reset();
       }
     });
   }
 
-  onInputChange = e => this.setState(personPropertyChanged(e.target.name, e.target.value));
-
-
-  // handlers to use with Form
-  // use these instead of the methods above
-  // --------------------------------------
-
-  onSubmit = (model, reset) => {
-    // take logic from onSave
-    // you can use reset() on failure
-  }
-
   onFormValid = () => {
-    // update state to enable the save button
+    this.setState({ valid: true });
   }
 
   onFormInvalid = () => {
-    // update state to disable the save button
+    this.setState({ valid: false });
   }
 
-  onChange = (model) => {
-    // update a state property so the title of the card
-    // reflects the current edit - remember that the
-    // person from props MUST NOT be mutated
+  onChange = (model, isDirty) => {
+    this.setState({
+      title: `${model.firstname} ${model.lastname}`,
+      dirty: isDirty
+    });
   }
 
   
   render() {
-    const { onCancel } = this.props;
-    const { form, saving, valid } = this.state;
+    const { onCancel, person } = this.props;
+    const { saving, valid, title, dirty } = this.state;
 
     return (
       <Form
@@ -75,28 +56,31 @@ class PersonForm extends Component {
         onChange={this.onChange}
       >
         <Card actions={[
-          <button type="button" className="btn btn-default" onClick={this.onSubmit_old} key="save" disabled={saving || !valid}>save</button>,
+          <button type="submit" className="btn btn-default" key="save" disabled={saving || !valid || !dirty}>save</button>,
           <a onClick={onCancel} key="cancel">cancel</a>
         ]}>
           <Card.Title
-            mainTitle={`${form.firstname} ${form.lastname}`}
+            mainTitle={title}
           />
           <Input name="firstname" type="text" label="first name"
-                 value={form.firstname} onChange={this.onInputChange}
-                 isInvalid={!form.firstname} disabled={saving} />
+                 value={person.firstname} required />
           <Input name="lastname" type="text" label="last name"
-                 value={form.lastname} onChange={this.onInputChange}
-                 isInvalid={!form.lastname} disabled={saving} />
+                 value={person.lastname} required />
           <Input name="entity" type="text" label="entity"
-                 value={form.entity} onChange={this.onInputChange}
-                 isInvalid={!form.entity} disabled={saving} />
+                 value={person.entity} required />
           <Input name="email" type="text" label="email"
-                 value={form.email} onChange={this.onInputChange}
-                 isInvalid={!form.email} disabled={saving} />
+                 value={person.email} required
+                 validations="isEmail" validationError="please enter a valid email address" />
           <Input name="phone" type="text" label="phone"
-                 value={form.phone} onChange={this.onInputChange}
-                 isInvalid={!form.phone} disabled={saving} />
+                 value={person.phone} required
+                 validations="isFrenchPhoneNumber" validationError="please enter a valid 10 digit french phone number" />
         </Card>
+        <Prompt
+          when={dirty}
+          message={location => (
+            `Are you sure you want to go to ${location.pathname}`
+          )}
+        />        
       </Form>
     );
   }
