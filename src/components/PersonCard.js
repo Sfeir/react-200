@@ -1,6 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { pure } from 'recompose';
 import Card from './Card';
 
 const PersonCard = ({ person, onEdit }) => (
@@ -23,7 +24,6 @@ const PersonCard = ({ person, onEdit }) => (
         <Link to={`/person/${person.managerId}`}>{person.manager}</Link>
       </Card.Info>
     )}
-    { console.log(`rendering ${person.firstname}`) }
   </Card>
 );
 
@@ -42,4 +42,4 @@ PersonCard.propTypes = {
   onEdit: PropTypes.func
 }
 
-export default PersonCard;
+export default pure(PersonCard);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { pure } from 'recompose';
 import PersonCard from '../components/PersonCard';
 import Fab from '../components/Fab';
 
@@ -25,7 +26,7 @@ const pause = () => ({
 
 // subcomponents
 
-const Fabs = ({playing, next, prev, play, pause}) => (
+const Fabs = pure(({playing, next, prev, play, pause}) => (
   <div className="control-container">
     <Fab kind="skip_previous" onClick={prev} />
     { playing
@@ -34,7 +35,7 @@ const Fabs = ({playing, next, prev, play, pause}) => (
     }
     <Fab kind="skip_next" onClick={next} />
   </div>
-);
+));
 
 // container
 

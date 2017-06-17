@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { compose, withState, withHandlers, withProps } from 'recompose';
 import PersonCard from '../components/PersonCard';
 import SearchInput from '../components/SearchInput';
 
@@ -9,48 +10,38 @@ const filterPerson = search => {
   return person => re.test(person.firstname) || re.test(person.lastname);
 };
 
-// state management
+// enhance
 
-const searchChanged = value => () => ({
-  search: value || ''
-});
+const withSearch = withState('search', 'setSearch', '');
+
+const withFilteredPeople = withProps(props => ({
+  filteredPeople: props.people.filter(filterPerson(props.search))
+}));
+
+const withSearchChanged = withHandlers({
+  searchChanged: props => event => props.setSearch(event.target.value)
+})
+
+const enhance = compose(withSearch, withFilteredPeople, withSearchChanged);
 
 // Component
 
-class ListAll extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      search: ''
-    };
-  }
+const ListAll = ({ filteredPeople, search, searchChanged }) => (
+  <div className="ListAll">
+    <div className="card-container">
+      { filteredPeople
+        .map(person => 
+          <PersonCard person={person} key={person.id} />
+        )
+      }
+    </div>
+    <div className="control-container">
+      <SearchInput id="search" label="search by name"
+        value={search}
+        onChange={searchChanged}
+      />
+    </div>
+  </div>
+);
 
-  searchChanged = event => {
-    this.setState(searchChanged(event.target.value));
-  }
-  
-  render() {
-    const { people } = this.props;
-    const { search } = this.state;
-    return (
-      <div className="ListAll">
-        <div className="card-container">
-          { people
-            .filter(filterPerson(search))
-            .map(person => 
-              <PersonCard person={person} key={person.id} />
-            )
-          }
-        </div>
-        <div className="control-container">
-          <SearchInput id="search" label="search by name"
-            value={search}
-            onChange={this.searchChanged}
-          />
-        </div>
-      </div>
-    );
-  }
-}
-
-export default ListAll;
+export default enhance(ListAll);
