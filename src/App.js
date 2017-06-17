@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
 import { fetchPeople, updatePerson } from './service/people';
+import { replaceOrPrepend } from './utils';
 
 import Discover from './pages/Discover';
 import ListAll from './pages/ListAll';
@@ -11,14 +12,9 @@ import Person from './pages/Person';
 import AppBar from './components/AppBar';
 import Spinner from './components/Spinner';
 
-const mergeInto = (item, list) => (
-  list.some(li => li.id === item.id)
-  ? list.map(li => li.id === item.id ? item : li)
-  : [item, ...list]
-);
-
+const merge = replaceOrPrepend((a, b) => a.id === b.id);
 const setPeople = people => () => ({ people });
-const setPerson = person => ({ people }) => ({ people: mergeInto(person, people) })
+const setPerson = person => ({ people }) => ({ people: merge(person, people) })
 
 class App extends Component {
   constructor(props) {
