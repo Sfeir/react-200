@@ -9,4 +9,10 @@ export const configureStore = () => createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
-export { peopleReceived, personReceived, searchChanged } from './actions';
+export {
+  peopleReceived,
+  personReceived,
+  searchChanged,
+  discoverNext,
+  discoverPrev
+} from './actions';

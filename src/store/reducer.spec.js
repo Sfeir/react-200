@@ -5,7 +5,8 @@ describe('rootReducer', () => {
     const actualState = reducer(undefined, {});
     expect(actualState).toEqual({
       people: expect.anything(),
-      search: expect.anything()
+      search: expect.anything(),
+      discover: expect.anything()
     });
   });
 });

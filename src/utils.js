@@ -4,6 +4,10 @@ export const replaceOrPrepend = match => (item, list) => (
   : [item, ...list]
 );
 
+export const succ = (current, min, max) => (current === max) ? min : current + 1;
+
+export const pred = (current, min, max) => (current === min) ? max : current - 1;
+
 export const freeze = thing => {
   if (typeof thing === 'object') {
     Object.freeze(thing);
@@ -11,3 +15,4 @@ export const freeze = thing => {
   }
   return thing;
 };
+

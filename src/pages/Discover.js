@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
+import { succ, pred } from '../utils';
 import PersonCard from '../components/PersonCard';
 import Fab from '../components/Fab';
 
 // state management
-
-const succ = (current, min, max) => (current === max) ? min : current + 1;
-const pred = (current, min, max) => (current === min) ? max : current - 1;
 
 const setNext = ({ current }, { people }) => ({
   current: succ(current, 1, people.length)
