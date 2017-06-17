@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { updatePerson } from '../service/people';
+import { personReceived } from '../store';
 import Person from './Person';
 
 const mapStateToProps = (state, props) => ({
@@ -10,7 +11,7 @@ const mapDispatchToProps = dispatch => ({
   savePerson: (id, partialPerson) => (
     updatePerson(id, partialPerson)
       .then(person => {
-        dispatch({ type: 'PERSON_RECEIVED', person });
+        dispatch(personReceived(person));
         return true;
       })
       .catch(e => {

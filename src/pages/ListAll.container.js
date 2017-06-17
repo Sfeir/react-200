@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { compose, withHandlers, withProps } from 'recompose';
+import { searchChanged } from '../store';
 import ListAll from './ListAll';
 
 const filterPerson = search => {
@@ -22,7 +23,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setSearch: (search) => dispatch({ type: 'SEARCH_CHANGED', search })
+  setSearch: (search) => dispatch(searchChanged(search))
 });
 
 const enhance = compose(

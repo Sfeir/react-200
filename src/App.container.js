@@ -3,6 +3,7 @@ import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 
 import { fetchPeople } from './service/people';
+import { peopleReceived } from './store';
 import App from './App';
 
 const mapStateToProps = state => ({
@@ -13,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
   loadPeople: () => (
     fetchPeople()
       .then(people => {
-        dispatch({ type: 'PEOPLE_RECEIVED', people });
+        dispatch(peopleReceived(people));
         return true;
       })
       .catch(e => {
