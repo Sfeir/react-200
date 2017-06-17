@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
 import Discover from './pages/Discover';
-import ListAll from './pages/ListAll';
+import ListAll from './pages/ListAll.container';
 import Person from './pages/Person';
 import AppBar from './components/AppBar';
 import Spinner from './components/Spinner';
@@ -25,9 +25,7 @@ class App extends Component {
           { people.length === 0
           ? <Spinner />
           : <Switch>
-              <Route path="/all" render={() =>
-                <ListAll people={people} />
-              } />
+              <Route path="/all" component={ListAll} />
               <Route path="/discover" render={() =>
                 <Discover people={people} />
               } />
