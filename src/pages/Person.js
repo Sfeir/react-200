@@ -12,9 +12,11 @@ class Person extends Component {
   onCancel = () => this.setState({ editing: false });
 
   onSave = (patch) => {
-    // call props.onSave with appropriate parameters
-    // switch back to view mode if update successful
-    // handle error otherwise
+    return this.props.onSave(this.props.person.id, patch)
+      .then(success => {
+        if (success) { this.setState({ editing: false }) }
+        return success;
+      });
   }
   
   renderCardOrForm() {
