@@ -4,11 +4,13 @@ export * from './people/actions';
 export * from './search/actions';
 
 export function discoverNext() {
-  // return a thunk that dispatches discover.discoverNext(total)
-  // with total set to the number of people
+  return (dispatch, getState) => {
+    dispatch(discover.discoverNext(getState().people.length));
+  };
 }
 
 export function discoverPrev() {
-  // return a thunk that dispatches discover.discoverPrev(total)
-  // with total set to the number of people
+  return (dispatch, getState) => {
+    dispatch(discover.discoverPrev(getState().people.length));
+  };
 }
