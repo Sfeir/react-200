@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
-import { succ, pred } from '../utils';
 import PersonCard from '../components/PersonCard';
 import Fab from '../components/Fab';
 
 // state management
-
-const setNext = ({ current }, { people }) => ({
-  current: succ(current, 1, people.length)
-});
-
-const setPrev = ({ current }, { people }) => ({
-  current: pred(current, 1, people.length)
-});
 
 const play = () => ({
   playing: true
@@ -41,17 +32,16 @@ class Discover extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: 1,
       playing: false
     }
   }
 
   showNextPerson = () => {
-    this.setState(setNext);
+    this.props.showNext();
   };
   
   showPreviousPerson = () => {
-    this.setState(setPrev);
+    this.props.showPrev();
   };
 
   play = () => {
@@ -70,12 +60,12 @@ class Discover extends Component {
   }
   
   render() {
-    const { people } = this.props;
-    const { current, playing } = this.state;
+    const { person } = this.props;
+    const { playing } = this.state;
     return (
       <div className="Discover">
         <div className="card-container">
-          <PersonCard person={people[current - 1]} />
+          <PersonCard person={person} />
         </div>  
         <Fabs
           playing={playing}
