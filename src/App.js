@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
-import Discover from './pages/Discover';
+import Discover from './pages/Discover.container';
 import ListAll from './pages/ListAll.container';
-import Person from './pages/Person';
+import Person from './pages/Person.container';
 import AppBar from './components/AppBar';
 import Spinner from './components/Spinner';
 
@@ -15,26 +15,19 @@ class App extends Component {
   }
 
   render() {
-    const { people, savePerson } = this.props;
+    const { peopleLoading } = this.props;
     return (
       <div className="App">
         <header>
           <AppBar />
         </header>
         <main>
-          { people.length === 0
+          { peopleLoading
           ? <Spinner />
           : <Switch>
               <Route path="/all" component={ListAll} />
-              <Route path="/discover" render={() =>
-                <Discover people={people} />
-              } />
-              <Route path="/person/:id" render={({match}) =>
-                <Person
-                  person={people.find(person => person.id === match.params.id)}
-                  onSave={savePerson}
-                />
-              } />
+              <Route path="/discover" component={Discover} />
+              <Route path="/person/:id" component={Person} />
               <Redirect to="/all" />
             </Switch>
           }

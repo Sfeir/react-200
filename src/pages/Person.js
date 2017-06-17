@@ -12,7 +12,7 @@ class Person extends Component {
   onCancel = () => this.setState({ editing: false });
 
   onSave = (patch) => {
-    return this.props.onSave(this.props.person.id, patch)
+    return this.props.savePerson(this.props.person.id, patch)
       .then(success => {
         if (success) { this.setState({ editing: false }) }
         return success;
