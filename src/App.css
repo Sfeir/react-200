@@ -49,7 +49,7 @@
   color: #0168AB;
 }
 
-.App .input-field input[type=text]:focus {
+.App .input-field input[type=text]:focus:not(.invalid) {
   border-bottom: 1px solid #0168AB;
   box-shadow: 0 1px 0 0 #0168AB;
 }
@@ -61,4 +61,14 @@
 .App .btn-default:hover {
   background-color: #0168AB;
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+/****************************/
+
+.App .input-field label {
+  right: 0;
+}
+
+.App input[type=text] + label:after {
+  right: 0;
 }

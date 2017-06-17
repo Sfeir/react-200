@@ -1,17 +1,34 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
-const Input = ({placeholder, ...props}) => (
+const idForName = (name) => `person-form-${name}`;
+
+const Input = ({
+  name,
+  type,
+  label,
+  value,
+  onChange,
+  disabled,
+  isInvalid,
+  errorMessage  
+}) => (
   <div className="input-field">
-    <input {...props} />
+    <input
+      id={idForName(name)}
+      name={name}
+      type={type}
+      value={value}
+      onChange={onChange}
+      disabled={disabled}
+      className={isInvalid ? 'invalid' : undefined}
+      autoComplete="off"
+    />
     <label
-      htmlFor={props.id}
-      className={props.value ? 'active' : null}>{placeholder}</label>
+      htmlFor={idForName(name)}
+      className={value ? 'active' : undefined}
+      data-error={errorMessage}
+    >{label}</label>
   </div>
 );
-
-Input.propTypes = {
-  id: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired
-}
 
 export default Input;
