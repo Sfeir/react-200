@@ -23,7 +23,8 @@ const PersonCard = ({ person, onEdit }) => (
         <Link to={`/person/${person.managerId}`}>{person.manager}</Link>
       </Card.Info>
     )}
-  </Card>  
+    { console.log(`rendering ${person.firstname}`) }
+  </Card>
 );
 
 PersonCard.propTypes = {
