@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
-import { fetchPeople, savePerson } from './service/people';
+import { fetchPeople, updatePerson } from './service/people';
 
 import Discover from './pages/Discover';
 import ListAll from './pages/ListAll';
@@ -11,6 +11,14 @@ import Person from './pages/Person';
 import AppBar from './components/AppBar';
 import Spinner from './components/Spinner';
 
+const mergeInto = (item, list) => (
+  list.some(li => li.id === item.id)
+  ? list.map(li => li.id === item.id ? item : li)
+  : [item, ...list]
+);
+
+const setPeople = people => () => ({ people });
+const setPerson = person => ({ people }) => ({ people: mergeInto(person, people) })
 
 class App extends Component {
   constructor(props) {
@@ -21,29 +29,39 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchPeople();
+    this.loadPeople()
+    .then(success => !success && alert('could not load people :('));
   }
 
-  fetchPeople() {
+  loadPeople() {
     return (
       fetchPeople()
-      .then(people => this.setState({ people }))
+      .then(people => {
+        this.setState(setPeople(people));
+        return true;
+      })
       .catch(e => {
-        console.error('could not fetch people :(', e);
+        console.error(e);
+        return false;
       })
     );
   }
 
-  savePerson(person) {
+  savePerson(id, partialPerson) {
     return (
-      savePerson(person)
-      .then(() => this.fetchPeople())
+      updatePerson(id, partialPerson)
+      .then(person => {
+        this.setState(setPerson(person));
+        return true;
+      })
       .catch(e => {
-        console.error('could not save person :(', e);
-        throw e;
+        console.error(e);
+        return false;
       })
     );
   }
+
+  onSave = (id, partial) => this.savePerson(id, partial);
 
   render() {
     const { people } = this.state;
@@ -63,7 +81,10 @@ class App extends Component {
                 <Discover people={people} />
               } />
               <Route path="/person/:id" render={({match}) =>
-                <Person person={people.find(person => person.id === match.params.id)} />
+                <Person
+                  person={people.find(person => person.id === match.params.id)}
+                  onSave={this.onSave}
+                />
               } />
               <Redirect to="/all" />
             </Switch>
