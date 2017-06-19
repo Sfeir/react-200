@@ -25,7 +25,7 @@ class Person extends Component {
     if (editing) {
       return <PersonForm person={person} onSave={this.onSave} onCancel={this.onCancel} />;
     } else {
-      return <PersonCard person={person} onEdit={this.onEdit} />;
+      return <PersonCard id={person.id} onEdit={this.onEdit} />;
     }
   }
   

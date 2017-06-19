@@ -8,8 +8,8 @@ const filterPerson = search => {
   return person => re.test(person.firstname) || re.test(person.lastname);
 };
 
-const withFilteredPeople = withProps(props => ({
-  filteredPeople: props.people.filter(filterPerson(props.search))
+const withFilteredIds = withProps(props => ({
+  personIds: props.people.filter(filterPerson(props.search)).map(p => p.id)
 }));
 
 const withSearchChanged = withHandlers({
@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
 
 const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withFilteredPeople,
+  withFilteredIds,
   withSearchChanged
 );
 

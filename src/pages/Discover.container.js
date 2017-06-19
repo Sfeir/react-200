@@ -3,7 +3,7 @@ import { discoverNext, discoverPrev } from '../store';
 import Discover from './Discover';
 
 const mapStateToProps = state => ({
-  person: state.people[state.discover - 1]
+  current: state.people[state.discover - 1].id
 });
 
 const mapDispatchToProps = ({

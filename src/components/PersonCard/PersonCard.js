@@ -1,8 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { pure } from 'recompose';
-import Card from './Card';
+import Card from '../Card';
 
 const PersonCard = ({ person, onEdit }) => (
   <Card actions={ onEdit && [
@@ -42,4 +41,4 @@ PersonCard.propTypes = {
   onEdit: PropTypes.func
 }
 
-export default pure(PersonCard);
+export default PersonCard;

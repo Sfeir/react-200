@@ -3,12 +3,12 @@ import PersonCard from '../components/PersonCard';
 import SearchInput from '../components/SearchInput';
 
 
-const ListAll = ({ filteredPeople, search, searchChanged }) => (
+const ListAll = ({ personIds, search, searchChanged }) => (
   <div className="ListAll">
     <div className="card-container">
-      { filteredPeople
-        .map(person => 
-          <PersonCard person={person} key={person.id} />
+      { personIds
+        .map(personId => 
+          <PersonCard id={personId} key={personId} />
         )
       }
     </div>

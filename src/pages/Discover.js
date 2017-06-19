@@ -39,7 +39,7 @@ class Discover extends Component {
   showNextPerson = () => {
     this.props.showNext();
   };
-  
+
   showPreviousPerson = () => {
     this.props.showPrev();
   };
@@ -58,15 +58,15 @@ class Discover extends Component {
   componentWillUnmount() {
     clearInterval(this.intervalId);
   }
-  
+
   render() {
-    const { person } = this.props;
+    const { current } = this.props;
     const { playing } = this.state;
     return (
       <div className="Discover">
         <div className="card-container">
-          <PersonCard person={person} />
-        </div>  
+          <PersonCard id={current} />
+        </div>
         <Fabs
           playing={playing}
           next={this.showNextPerson}
