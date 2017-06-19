@@ -8,32 +8,24 @@ class Person extends Component {
     this.state = { editing: false };
   }
 
-  onEdit = () => this.setState({ editing: true });
-  onCancel = () => this.setState({ editing: false });
-
-  onSave = (patch) => {
-    return this.props.savePerson(this.props.person.id, patch)
-      .then(success => {
-        if (success) { this.setState({ editing: false }) }
-        return success;
-      });
-  }
+  beginEdit = () => this.setState({ editing: true });
+  endEdit = () => this.setState({ editing: false });
   
   renderCardOrForm() {
-    const { person } = this.props;
+    const { id } = this.props;
     const { editing } = this.state;
     if (editing) {
-      return <PersonForm person={person} onSave={this.onSave} onCancel={this.onCancel} />;
+      return <PersonForm id={id} onDone={this.endEdit} />;
     } else {
-      return <PersonCard id={person.id} onEdit={this.onEdit} />;
+      return <PersonCard id={id} onEdit={this.beginEdit} />;
     }
   }
   
   render() {
-    const { person } = this.props;
+    const { personExists } = this.props;
     return (
       <div className="card-container">
-        { person
+        { personExists
         ? this.renderCardOrForm()
         : "not found :("
         }

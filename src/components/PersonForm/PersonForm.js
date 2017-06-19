@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Form } from 'formsy-react';
 import { Prompt } from 'react-router-dom';
-import Card from './Card';
-import Input from './Input';
+import Card from '../Card';
+import Input from '../Input';
 
 class PersonForm extends Component {
   constructor(props) {
@@ -17,9 +17,11 @@ class PersonForm extends Component {
   
   onSubmit = (model, reset) => {
     this.setState({ saving: true });
-    this.props.onSave(model)
+    this.props.submit(model)
     .then(success => {
-      if (!success) {
+      if (success) {
+        this.props.onDone();
+      } else {
         this.setState({ saving: false });
         alert('could not update person :(');
         reset();
@@ -44,7 +46,7 @@ class PersonForm extends Component {
 
   
   render() {
-    const { onCancel, person } = this.props;
+    const { onDone, person } = this.props;
     const { saving, valid, title, dirty } = this.state;
 
     return (
@@ -57,7 +59,7 @@ class PersonForm extends Component {
       >
         <Card actions={[
           <button type="submit" className="btn btn-default" key="save" disabled={saving || !valid || !dirty}>save</button>,
-          <a onClick={onCancel} key="cancel">cancel</a>
+          <a onClick={onDone} key="cancel">cancel</a>
         ]}>
           <Card.Title
             mainTitle={title}
