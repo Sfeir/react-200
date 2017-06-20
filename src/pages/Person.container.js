@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import Person from './Person';
+import { getPersonById } from '../store';
 
 const mapStateToProps = (state, props) => ({
-  personExists: state.people.all.includes(props.match.params.id),
+  personExists: getPersonById(state, props.match.params.id) !== undefined,
   id: props.match.params.id
 });
 

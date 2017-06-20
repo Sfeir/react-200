@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import peopleReducer from './people/reducer';
+import peopleReducer, * as people from './people/reducer';
 import searchReducer from './search/reducer';
 import discoverReducer from './discover/reducer';
 
@@ -8,3 +8,7 @@ export default combineReducers({
   search: searchReducer,
   discover: discoverReducer
 });
+
+// selectors
+
+export const getPersonById = (state, id) => people.getPersonById(state.people, id);

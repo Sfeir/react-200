@@ -29,3 +29,7 @@ const reducer = combineReducers({
 })
 
 export default reducer;
+
+// selectors
+
+export const getPersonById = (state, id) => state.map[id];

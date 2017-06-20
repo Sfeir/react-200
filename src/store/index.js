@@ -16,3 +16,7 @@ export {
   discoverNext,
   discoverPrev
 } from './actions';
+
+export {
+  getPersonById
+} from './reducer';

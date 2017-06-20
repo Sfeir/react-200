@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { updatePerson } from '../../service/people';
-import { personReceived } from '../../store';
+import { personReceived, getPersonById } from '../../store';
 import PersonForm from './PersonForm';
 
 const mapStateToProps = (state, { id }) => ({
-  person: state.people.map[id]
+  person: getPersonById(state, id)
 });
 
 const mapDispatchToProps = (dispatch, { id }) => ({
