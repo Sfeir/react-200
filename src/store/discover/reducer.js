@@ -15,3 +15,7 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
+
+// selectors
+
+export const getCurrentIndex = (state) => state - 1;

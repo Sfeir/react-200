@@ -3,11 +3,11 @@ import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 
 import { fetchPeople } from './service/people';
-import { peopleReceived } from './store';
+import { peopleReceived, getAllPersonIds } from './store';
 import App from './App';
 
 const mapStateToProps = state => ({
-  peopleLoading: state.people.all.length === 0
+  peopleLoading: getAllPersonIds(state).length === 0
 });
 
 const mapDispatchToProps = dispatch => ({

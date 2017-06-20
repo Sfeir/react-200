@@ -33,3 +33,4 @@ export default reducer;
 // selectors
 
 export const getPersonById = (state, id) => state.map[id];
+export const getAllPersonIds = (state) => state.all;

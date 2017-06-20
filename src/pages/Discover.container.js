@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { discoverNext, discoverPrev } from '../store';
+import { discoverNext, discoverPrev, getCurrentDiscoverId } from '../store';
 import Discover from './Discover';
 
 const mapStateToProps = state => ({
-  current: state.people.all[state.discover - 1]
+  current: getCurrentDiscoverId(state)
 });
 
 const mapDispatchToProps = ({

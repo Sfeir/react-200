@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { compose, withHandlers, withProps } from 'recompose';
-import { searchChanged } from '../store';
+import { searchChanged, getAllPersonIds, getPersonById, getSearch } from '../store';
 import ListAll from './ListAll';
 
 const filterPerson = search => {
@@ -18,8 +18,8 @@ const withSearchChanged = withHandlers({
 
 
 const mapStateToProps = state => ({
-  people: state.people.all.map(id => state.people.map[id]),
-  search: state.search
+  people: getAllPersonIds(state).map(id => getPersonById(state, id)),
+  search: getSearch(state)
 });
 
 const mapDispatchToProps = dispatch => ({

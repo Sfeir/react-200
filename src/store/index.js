@@ -18,5 +18,8 @@ export {
 } from './actions';
 
 export {
-  getPersonById
+  getPersonById,
+  getAllPersonIds,
+  getCurrentDiscoverId,
+  getSearch
 } from './reducer';
