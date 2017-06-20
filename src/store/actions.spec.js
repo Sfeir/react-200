@@ -2,7 +2,9 @@ import * as discover from './discover/actions';
 import { discoverNext, discoverPrev } from './actions';
 
 const getState = () => ({
-  people: [{}, {}, {}]
+  people: {
+    all: [1, 2, 3]
+  }
 });
 
 describe('discoverNext', () => {

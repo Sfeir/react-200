@@ -18,7 +18,7 @@ const withSearchChanged = withHandlers({
 
 
 const mapStateToProps = state => ({
-  people: state.people,
+  people: state.people.all.map(id => state.people.map[id]),
   search: state.search
 });
 

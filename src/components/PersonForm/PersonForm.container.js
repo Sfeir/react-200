@@ -4,7 +4,7 @@ import { personReceived } from '../../store';
 import PersonForm from './PersonForm';
 
 const mapStateToProps = (state, { id }) => ({
-  person: state.people.find(p => p.id === id)
+  person: state.people.map[id]
 });
 
 const mapDispatchToProps = (dispatch, { id }) => ({

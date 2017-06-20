@@ -5,12 +5,12 @@ export * from './search/actions';
 
 export function discoverNext() {
   return (dispatch, getState) => {
-    dispatch(discover.discoverNext(getState().people.length));
+    dispatch(discover.discoverNext(getState().people.all.length));
   };
 }
 
 export function discoverPrev() {
   return (dispatch, getState) => {
-    dispatch(discover.discoverPrev(getState().people.length));
+    dispatch(discover.discoverPrev(getState().people.all.length));
   };
 }

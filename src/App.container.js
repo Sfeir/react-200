@@ -7,7 +7,7 @@ import { peopleReceived } from './store';
 import App from './App';
 
 const mapStateToProps = state => ({
-  peopleLoading: state.people.length === 0
+  peopleLoading: state.people.all.length === 0
 });
 
 const mapDispatchToProps = dispatch => ({
