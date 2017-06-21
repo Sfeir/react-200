@@ -30,7 +30,21 @@ const reducer = combineReducers({
 
 export default reducer;
 
+// utils
+
+const filterPerson = search => {
+  const re = new RegExp(search, 'i');
+  return person => re.test(person.firstname) || re.test(person.lastname);
+};
+
 // selectors
 
 export const getPersonById = (state, id) => state.map[id];
-export const getAllPersonIds = (state) => state.all;
+export const getPersonCount = (state) => state.all.length;
+export const getPersonIdByIndex = (state, idx) => state.all[idx];
+export const getFilteredPersonIds = (state, filter) => (
+  state.all
+    .map(id => state.map[id])
+    .filter(filterPerson(filter))
+    .map(p => p.id)
+);

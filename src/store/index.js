@@ -19,7 +19,8 @@ export {
 
 export {
   getPersonById,
-  getAllPersonIds,
-  getCurrentDiscoverId,
-  getSearch
+  getPersonCount,
+  getSearch,
+  getFilteredPersonIds,
+  getCurrentDiscoverId
 } from './reducer';

@@ -12,6 +12,7 @@ export default combineReducers({
 // selectors
 
 export const getPersonById = (state, id) => people.getPersonById(state.people, id);
-export const getAllPersonIds = (state) => people.getAllPersonIds(state.people);
+export const getPersonCount = (state) => people.getPersonCount(state.people);
 export const getSearch = (state) => search.getTerm(state.search);
-export const getCurrentDiscoverId = (state) => people.getAllPersonIds(state.people)[discover.getCurrentIndex(state.discover)];
+export const getFilteredPersonIds = (state) => people.getFilteredPersonIds(state.people, getSearch(state));
+export const getCurrentDiscoverId = (state) => people.getPersonIdByIndex(state.people, discover.getCurrentIndex(state.discover));
