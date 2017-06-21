@@ -1,9 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { fetchPeople, updatePerson } from '../service/people';
 import rootReducer from './reducer';
+import { peopleRequestedUsing, personUpdatedUsing } from './actions';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 
 export const configureStore = () => {
   let initialState = localStorage.getItem('state') || undefined;
@@ -26,9 +27,9 @@ export const configureStore = () => {
   return store;
 }
 
+export const peopleRequested = peopleRequestedUsing(fetchPeople);
+export const personUpdated = personUpdatedUsing(updatePerson);
 export {
-  peopleReceived,
-  personReceived,
   searchChanged,
   discoverNext,
   discoverPrev

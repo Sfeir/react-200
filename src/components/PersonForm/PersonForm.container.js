@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-import { updatePerson } from '../../service/people';
-import { personReceived, getPersonById } from '../../store';
+import { personUpdated, getPersonById } from '../../store';
 import PersonForm from './PersonForm';
 
 const mapStateToProps = (state, { id }) => ({
@@ -8,17 +7,7 @@ const mapStateToProps = (state, { id }) => ({
 });
 
 const mapDispatchToProps = (dispatch, { id }) => ({
-  submit: (partialPerson) => (
-    updatePerson(id, partialPerson)
-      .then(person => {
-        dispatch(personReceived(person));
-        return true;
-      })
-      .catch(e => {
-        console.error(e);
-        return false;
-      })
-  )
+  submit: (partialPerson) => dispatch(personUpdated(id, partialPerson))
 });
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);

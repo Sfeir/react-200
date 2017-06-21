@@ -2,8 +2,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 
-import { fetchPeople } from './service/people';
-import { peopleReceived, getPersonCount } from './store';
+import { peopleRequested, getPersonCount } from './store';
 import App from './App';
 
 const mapStateToProps = state => ({
@@ -11,17 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadPeople: () => (
-    fetchPeople()
-      .then(people => {
-        dispatch(peopleReceived(people));
-        return true;
-      })
-      .catch(e => {
-        console.error(e);
-        return false;
-      })
-  )
+  loadPeople: () => dispatch(peopleRequested())
 });
 
 const enhance = compose(
