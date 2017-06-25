@@ -1,11 +1,11 @@
 import React from 'react';
 import Card from './Card';
 
-const Person = ({person}) => (
+const Person = ({ person }) => (
   <Card>
     <Card.Avatar photoUrl={person.photo} altText={`photo of ${person.firstname}`} />
     <Card.Title
-      mainTitle={<a href="#">{person.firstname} {person.lastname}</a>}
+      mainTitle={<a href={`/person/${person.id}`}>{person.firstname} {person.lastname}</a>}
       subTitle={person.entity}
     />
     <Card.Info icon="email">
@@ -14,9 +14,9 @@ const Person = ({person}) => (
     <Card.Info icon="phone">
       <a href={`tel:${person.phone}`}>{person.phone}</a>
     </Card.Info>
-    { person.manager && (
+    { person.managerId && (
       <Card.Info icon="supervisor_account" desc="manager">
-        <a href="#">{person.manager}</a>
+        <a href={`/person/${person.managerId}`}>{person.manager}</a>
       </Card.Info>
     )}
   </Card>  
