@@ -1,17 +1,56 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Person from './Person';
+import SearchInput from './SearchInput';
 
-const ListAll = ({ people }) => (
-  <div>
-    <div className="card-container">
-      { people.map(person => 
-        <Person person={person} key={person.id} />
-      )}
-    </div>
-    <div className="control-container">
-      place SearchInput here
-    </div>
-  </div>  
-);
+// utils
+
+const filterPerson = search => {
+  const re = new RegExp(search, 'i');
+  return person => re.test(person.firstname) || re.test(person.lastname);
+};
+
+// state management
+
+const searchChanged = value => () => ({
+  search: value || ''
+});
+
+// Component
+
+class ListAll extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      search: ''
+    };
+  }
+
+  searchChanged = event => {
+    this.setState(searchChanged(event.target.value));
+  }
+  
+  render() {
+    const { people } = this.props;
+    const { search } = this.state;
+    return (
+      <div className="ListAll">
+        <div className="card-container">
+          { people
+            .filter(filterPerson(search))
+            .map(person => 
+              <Person person={person} key={person.id} />
+            )
+          }
+        </div>
+        <div className="control-container">
+          <SearchInput id="search" label="search by name"
+            value={search}
+            onChange={this.searchChanged}
+          />
+        </div>
+      </div>
+    );
+  }
+}
 
 export default ListAll;
