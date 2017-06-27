@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import PEOPLE from './data/people.json';
-
 import AppBar from './components/AppBar';
 import Discover from './components/Discover';
 import ListAll from './components/ListAll';
+import Spinner from './components/Spinner';
 
 const DISCOVER = 'discover';
 const LISTALL = 'show all';
@@ -17,23 +16,32 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shown: DISCOVER
+      shown: DISCOVER,
+      people: null
     };
+  }
+
+  componentDidMount() {
+    fetch('api/people')
+    .then(res => res.json())
+    .then(people => this.setState({ people }));
   }
 
   toggleShown = () => this.setState(toggleShown);
   
   render() {
-    const { shown } = this.state;
+    const { shown, people } = this.state;
     return (
       <div className="App">
         <header>
           <AppBar show={other(shown)} toggleShow={this.toggleShown}/>
         </header>
         <main>
-          { shown === LISTALL
-          ? <ListAll people={PEOPLE} />
-          : <Discover people={PEOPLE} />
+          { people === null
+          ? <Spinner />
+          : shown === LISTALL
+          ? <ListAll people={people} />
+          : <Discover people={people} />
           }
         </main>
       </div>
