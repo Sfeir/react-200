@@ -27,7 +27,6 @@ export const peopleRequestedUsing = fetchPeople => () =>
         return true;
       })
       .catch(e => {
-        console.error(e);
         return false;
       });
   };
@@ -41,7 +40,6 @@ export const personUpdatedUsing = updatePerson => (id, patch) =>
         return true;
       })
       .catch(e => {
-        console.error(e);
         return false;
       });
   };
