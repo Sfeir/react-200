@@ -4,10 +4,9 @@ import Card from './Card';
 const Person = ({ person }) => (
   <Card>
     <Card.Avatar photoUrl={person.photo} altText={`photo of ${person.firstname}`} />
-    <Card.Title
-      mainTitle={<a href={`/person/${person.id}`}>{person.firstname} {person.lastname}</a>}
-      subTitle={person.entity}
-    />
+    <Card.Title subtitle={person.entity}>
+      <a href={`/person/${person.id}`}>{person.firstname} {person.lastname}</a>
+    </Card.Title>
     <Card.Info icon="email">
       <a href={`mailto:${person.email}`}>{person.email}</a>
     </Card.Info>

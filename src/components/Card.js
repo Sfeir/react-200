@@ -13,14 +13,12 @@ const Avatar = ({photoUrl, altText}) => (
   <img className="card-avatar" src={photoUrl} alt={altText} />
 );
 
-const Title = ({mainTitle, subTitle}) => (
+const Title = ({subtitle, children}) => (
   <div className="card-title">
     <div>
-      {mainTitle}
+      {children}
     </div>
-    <div className="card-subtitle">
-      {subTitle}
-    </div>
+    <div className="card-subtitle">{subtitle}</div>
   </div>
 );
 
