@@ -4,6 +4,8 @@ export const replaceOrPrepend = match => (item, list) => (
   : [item, ...list]
 );
 
+export const replaceOrPrependById = replaceOrPrepend((a, b) => a.id === b.id);
+
 export const freeze = thing => {
   if (typeof thing === 'object') {
     Object.freeze(thing);
