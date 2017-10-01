@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
 import { fetchPeople, updatePerson } from './service/people';
-import { replaceOrPrepend } from './utils';
+import { replaceOrPrependById } from './utils';
 
 import Discover from './pages/Discover';
 import ListAll from './pages/ListAll';
@@ -12,9 +12,8 @@ import Person from './pages/Person';
 import AppBar from './components/AppBar';
 import Spinner from './components/Spinner';
 
-const merge = replaceOrPrepend((a, b) => a.id === b.id);
 const setPeople = people => () => ({ people });
-const setPerson = person => ({ people }) => ({ people: merge(person, people) })
+const setPerson = person => ({ people }) => ({ people: replaceOrPrependById(person, people) })
 
 class App extends Component {
   constructor(props) {
