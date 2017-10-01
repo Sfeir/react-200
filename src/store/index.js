@@ -4,7 +4,10 @@ import { fetchPeople, updatePerson } from '../service/people';
 import rootReducer from './reducer';
 import { peopleRequestedUsing, personUpdatedUsing } from './actions';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const getEnhancer = () => {
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  return composeEnhancers(applyMiddleware(thunk));
+}
 
 export const configureStore = () => {
   let initialState = localStorage.getItem('state') || undefined;
@@ -15,7 +18,7 @@ export const configureStore = () => {
   const store = createStore(
     rootReducer,
     initialState,
-    composeEnhancers(applyMiddleware(thunk))
+    getEnhancer()
   );
 
   store.subscribe(() => {
