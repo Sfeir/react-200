@@ -4,6 +4,8 @@ export const replaceOrPrepend = match => (item, list) => (
   : [item, ...list]
 );
 
+export const replaceOrPrependById = replaceOrPrepend((a, b) => a.id === b.id);
+
 export const succ = (current, min, max) => (current === max) ? min : current + 1;
 
 export const pred = (current, min, max) => (current === min) ? max : current - 1;
