@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner snapshot 1`] = `
+<div
+  className="Spinner"
+>
+  <div
+    className="preloader-wrapper big active"
+  >
+    <div
+      className="spinner-layer"
+    >
+      <div
+        className="circle-clipper left"
+      >
+        <div
+          className="circle"
+        />
+      </div>
+      <div
+        className="gap-patch"
+      >
+        <div
+          className="circle"
+        />
+      </div>
+      <div
+        className="circle-clipper right"
+      >
+        <div
+          className="circle"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
