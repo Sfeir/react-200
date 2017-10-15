@@ -10,11 +10,11 @@ const Card = ({children}) => (
 );
 
 const Title = ({subtitle, children}) => (
-  <div class="card-title">
+  <div className="card-title">
     <div>
       {children}
     </div>
-    <div class="card-subtitle">{subtitle}</div>
+    <div className="card-subtitle">{subtitle}</div>
   </div>
 );
 
