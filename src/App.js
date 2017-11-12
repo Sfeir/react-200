@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('api/people')
+    fetch('/api/people')
     .then(res => res.json())
     .then(people => this.setState({ people }));
   }
