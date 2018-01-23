@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { compose, withStateHandlers, withProps } from 'recompose';
 import PersonCard from '../components/PersonCard';
 import SearchInput from '../components/SearchInput';
@@ -26,7 +26,7 @@ const enhance = compose(withSearchState, withFilteredPeople);
 // Component
 
 const ListAll = ({ filteredPeople, search, searchChanged }) => (
-  <div className="ListAll">
+  <Fragment>
     <div className="card-container">
       { filteredPeople
         .map(person => 
@@ -40,7 +40,7 @@ const ListAll = ({ filteredPeople, search, searchChanged }) => (
         onChange={searchChanged}
       />
     </div>
-  </div>
+  </Fragment>
 );
 
 export default enhance(ListAll);
