@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Person from '../components/Person';
 import SearchInput from '../components/SearchInput';
 
@@ -33,7 +33,7 @@ class ListAll extends Component {
     const { people } = this.props;
     const { search } = this.state;
     return (
-      <div className="ListAll">
+      <Fragment>
         <div className="card-container">
           { people
             .filter(filterPerson(search))
@@ -48,7 +48,7 @@ class ListAll extends Component {
             onChange={this.searchChanged}
           />
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
