@@ -1,8 +1,37 @@
 import React, { Component } from 'react';
-import { Form } from 'formsy-react';
+import Formsy, { withFormsy } from 'formsy-react';
 import { Prompt } from 'react-router-dom';
 import Card from '../Card';
-import Input from '../Input';
+import RawInput from '../Input';
+
+// adapt Input so it can be used with formsy-react
+
+const withFormsyProps = (FormControl) => {
+  return ({
+    getValue,
+    setValue,
+    isFormDisabled,
+    isValid,
+    getErrorMessage,
+    ...props
+  }) => <FormControl
+    {...props}
+    value={getValue()}
+    onChange={e => setValue(e.target.value)}
+    disabled={isFormDisabled()}
+    isInvalid={!isValid()}
+    errorMessage={getErrorMessage()}
+  />;
+};
+
+const suppressRefWarning = (Component) => {
+  return props => <Component {...props} innerRef={null} />;
+};
+
+// chain higher order components (withFormsyProps -> withFormsy -> suppressRefWarning)
+const Input = suppressRefWarning(withFormsy(withFormsyProps(RawInput)));
+
+//------------------------------------------------
 
 class PersonForm extends Component {
   constructor(props) {
@@ -50,7 +79,7 @@ class PersonForm extends Component {
     const { saving, valid, title, dirty } = this.state;
 
     return (
-      <Form
+      <Formsy
         disabled={saving}
         onValidSubmit={this.onSubmit}
         onValid={this.onFormValid}
@@ -83,7 +112,7 @@ class PersonForm extends Component {
             `Are you sure you want to go to ${location.pathname}`
           )}
         />        
-      </Form>
+      </Formsy>
     );
   }
 }
