@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { compose, withHandlers, withProps } from 'recompose';
+import { compose, withProps } from 'recompose';
 import ListAll from './ListAll';
 
 const filterPerson = search => {
@@ -11,24 +11,18 @@ const withFilteredPeople = withProps(props => ({
   filteredPeople: props.people.filter(filterPerson(props.search))
 }));
 
-const withSearchChanged = withHandlers({
-  searchChanged: props => event => props.setSearch(event.target.value)
-})
-
-
 const mapStateToProps = state => ({
   people: state.people,
   search: state.search
 });
 
 const mapDispatchToProps = dispatch => ({
-  setSearch: (search) => dispatch({ type: 'SEARCH_CHANGED', search })
+  searchChanged: event => dispatch({ type: 'SEARCH_CHANGED', search: event.target.value })
 });
 
 const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withFilteredPeople,
-  withSearchChanged
+  withFilteredPeople
 );
 
 export default enhance(ListAll);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { pure } from 'recompose';
 import PersonCard from '../components/PersonCard';
 import Fab from '../components/Fab';
@@ -75,7 +75,7 @@ class Discover extends Component {
     const { people } = this.props;
     const { current, playing } = this.state;
     return (
-      <div className="Discover">
+      <Fragment>
         <div className="card-container">
           <PersonCard person={people[current - 1]} />
         </div>  
@@ -86,7 +86,7 @@ class Discover extends Component {
           play={this.play}
           pause={this.pause}
         />
-      </div>
+      </Fragment>
     );
   }
 }
