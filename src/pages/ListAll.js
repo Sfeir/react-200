@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PersonCard from '../components/PersonCard';
 import SearchInput from '../components/SearchInput';
 
-
 const ListAll = ({ filteredPeople, search, searchChanged }) => (
-  <div className="ListAll">
+  <Fragment>
     <div className="card-container">
       { filteredPeople
         .map(person => 
@@ -18,7 +17,7 @@ const ListAll = ({ filteredPeople, search, searchChanged }) => (
         onChange={searchChanged}
       />
     </div>
-  </div>
+  </Fragment>
 );
 
 export default ListAll;
