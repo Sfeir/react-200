@@ -41,7 +41,7 @@
   font-weight: 300;
 }
 
-.App .input-field > input[type=text]:focus + label {
+.App .input-field > input[type=text]:not(.browser-default):focus:not([readonly]) + label {
   color: #0168AB;
 }
 

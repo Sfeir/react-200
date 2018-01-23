@@ -1,7 +1,36 @@
 import React, { Component } from 'react';
-import { Form } from 'formsy-react';
+import Formsy from 'formsy-react';
 import Card from './Card';
-import Input from './Input';
+import RawInput from './Input';
+
+// adapt Input so it can be used with formsy-react
+
+const withFormsyProps = (FormControl) => {
+  return ({
+    getValue,
+    setValue,
+    isFormDisabled,
+    isValid,
+    getErrorMessage,
+    ...props
+  }) => <FormControl
+    {...props}
+    value={getValue()}
+    onChange={e => setValue(e.target.value)}
+    disabled={isFormDisabled()}
+    isInvalid={!isValid()}
+    errorMessage={getErrorMessage()}
+  />;
+};
+
+const suppressRefWarning = (Component) => {
+  return props => <Component {...props} innerRef={null} />;
+};
+
+// chain higher order components (withFormsyProps -> withFormsy -> suppressRefWarning)
+const Input = RawInput;
+
+//------------------------------------------------
 
 const personPropertyChanged = (key, val) => ({ form }) => ({
   form: {...form, [key]: val},
@@ -67,7 +96,7 @@ class PersonForm extends Component {
     const { form, saving, valid } = this.state;
 
     return (
-      <Form
+      <Formsy
         disabled={saving}
         onValidSubmit={this.onSubmit}
         onValid={this.onFormValid}
@@ -97,7 +126,7 @@ class PersonForm extends Component {
                  value={form.phone} onChange={this.onInputChange}
                  isInvalid={!form.phone} disabled={saving} />
         </Card>
-      </Form>
+      </Formsy>
     );
   }
 }

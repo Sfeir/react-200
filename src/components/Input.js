@@ -31,8 +31,4 @@ const Input = ({
   </div>
 );
 
-// write a higher order function
-// so you can apply the formsy HOC
-// don't change Input
-
 export default Input;
