@@ -1,5 +1,5 @@
-import React from 'react';
-import { compose, withState, withHandlers, withProps } from 'recompose';
+import React, { Fragment } from 'react';
+import { compose, withStateHandlers, withProps } from 'recompose';
 import PersonCard from '../components/PersonCard';
 import SearchInput from '../components/SearchInput';
 
@@ -12,22 +12,21 @@ const filterPerson = search => {
 
 // enhance
 
-const withSearch = withState('search', 'setSearch', '');
+const withSearchState = withStateHandlers(
+  { search: '' },
+  { searchChanged: () => event => ({ search: event.target.value }) }
+);
 
 const withFilteredPeople = withProps(props => ({
   filteredPeople: props.people.filter(filterPerson(props.search))
 }));
 
-const withSearchChanged = withHandlers({
-  searchChanged: props => event => props.setSearch(event.target.value)
-})
-
-const enhance = compose(withSearch, withFilteredPeople, withSearchChanged);
+const enhance = compose(withSearchState, withFilteredPeople);
 
 // Component
 
 const ListAll = ({ filteredPeople, search, searchChanged }) => (
-  <div className="ListAll">
+  <Fragment>
     <div className="card-container">
       { filteredPeople
         .map(person => 
@@ -41,7 +40,7 @@ const ListAll = ({ filteredPeople, search, searchChanged }) => (
         onChange={searchChanged}
       />
     </div>
-  </div>
+  </Fragment>
 );
 
 export default enhance(ListAll);
