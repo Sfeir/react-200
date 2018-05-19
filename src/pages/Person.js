@@ -10,7 +10,7 @@ class Person extends Component {
 
   beginEdit = () => this.setState({ editing: true });
   endEdit = () => this.setState({ editing: false });
-  
+
   renderCardOrForm() {
     const { id } = this.props;
     const { editing } = this.state;
@@ -20,15 +20,12 @@ class Person extends Component {
       return <PersonCard id={id} onEdit={this.beginEdit} />;
     }
   }
-  
+
   render() {
     const { personExists } = this.props;
     return (
       <div className="card-container">
-        { personExists
-        ? this.renderCardOrForm()
-        : "not found :("
-        }
+        {personExists ? this.renderCardOrForm() : 'not found :('}
       </div>
     );
   }

@@ -7,7 +7,7 @@ const mapStateToProps = (state, { id }) => ({
 });
 
 const mapDispatchToProps = (dispatch, { id }) => ({
-  submit: (partialPerson) => dispatch(personUpdated(id, partialPerson))
+  submit: partialPerson => dispatch(personUpdated(id, partialPerson))
 });
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);

@@ -1,4 +1,4 @@
-import { succ, pred } from '../../utils'; 
+import { succ, pred } from '../../utils';
 import { DISCOVER_NEXT, DISCOVER_PREV } from './actions';
 
 const initialState = 1;
@@ -18,4 +18,4 @@ export default reducer;
 
 // selectors
 
-export const getCurrentIndex = (state) => state - 1;
+export const getCurrentIndex = state => state - 1;

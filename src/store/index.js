@@ -11,7 +11,7 @@ export const configureStore = () => {
   if (initialState !== undefined) {
     initialState = JSON.parse(initialState);
   }
-  
+
   const store = createStore(
     rootReducer,
     initialState,
@@ -25,15 +25,11 @@ export const configureStore = () => {
   });
 
   return store;
-}
+};
 
 export const peopleRequested = peopleRequestedUsing(fetchPeople);
 export const personUpdated = personUpdatedUsing(updatePerson);
-export {
-  searchChanged,
-  discoverNext,
-  discoverPrev
-} from './actions';
+export { searchChanged, discoverNext, discoverPrev } from './actions';
 
 export {
   getPersonById,

@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  searchChanged: (event) => dispatch(searchChanged(event.target.value))
+  searchChanged: event => dispatch(searchChanged(event.target.value))
 });
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);

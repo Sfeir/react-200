@@ -15,4 +15,4 @@ export default reducer;
 
 // selectors
 
-export const getTerm = (state) => state;
+export const getTerm = state => state;

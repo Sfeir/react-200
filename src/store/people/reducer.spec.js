@@ -34,13 +34,13 @@ describe('peopleMapReducer', () => {
   it('should replace the received person on PERSON_RECEIVED if it already exists', () => {
     const action = personReceived({ id: '2', firstname: 'Jill' });
     const actualState = mapReducer(testMap, action);
-    expect(actualState).toEqual({...testMap, '2': action.person});
+    expect(actualState).toEqual({ ...testMap, '2': action.person });
   });
 
   it('should add the received person on PERSON_RECEIVED when it does not exist', () => {
     const action = personReceived({ id: '4', firstname: 'Jill' });
     const actualState = mapReducer(testMap, action);
-    expect(actualState).toEqual({...testMap, '4': action.person});
+    expect(actualState).toEqual({ ...testMap, '4': action.person });
   });
 });
 

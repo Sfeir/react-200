@@ -6,10 +6,10 @@ const mapStateToProps = state => ({
   current: getCurrentDiscoverId(state)
 });
 
-const mapDispatchToProps = ({
+const mapDispatchToProps = {
   showNext: () => discoverNext(),
   showPrev: () => discoverPrev()
-});
+};
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);
 

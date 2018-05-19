@@ -19,7 +19,7 @@ describe('peopleRequested', () => {
     const thunk = actionCreator();
     const dispatch = jest.fn();
     thunk(dispatch);
-    expect(dispatch).toBeCalledWith({ type: PEOPLE_REQUESTED });    
+    expect(dispatch).toBeCalledWith({ type: PEOPLE_REQUESTED });
   });
 
   it('should call the api function', () => {
@@ -35,7 +35,7 @@ describe('peopleRequested', () => {
     const actionCreator = peopleRequestedUsing(loadPeopleSuccess);
     const thunk = actionCreator();
     const dispatch = jest.fn();
-    const expectedAction = peopleReceived(testPeople)
+    const expectedAction = peopleReceived(testPeople);
     const res = await thunk(dispatch);
     expect(dispatch).toHaveBeenLastCalledWith(expectedAction);
     expect(res).toBe(true);
@@ -56,7 +56,7 @@ describe('personUpdated', () => {
     const thunk = actionCreator(testPerson.id, testPerson);
     const dispatch = jest.fn();
     thunk(dispatch);
-    expect(dispatch).toBeCalledWith({ type: PERSON_UPDATED });    
+    expect(dispatch).toBeCalledWith({ type: PERSON_UPDATED });
   });
 
   it('should call the api function with correct params', () => {
@@ -72,7 +72,7 @@ describe('personUpdated', () => {
     const actionCreator = personUpdatedUsing(updatePersonSuccess);
     const thunk = actionCreator(testPerson.id, testPerson);
     const dispatch = jest.fn();
-    const expectedAction = personReceived(testPerson)
+    const expectedAction = personReceived(testPerson);
     const res = await thunk(dispatch);
     expect(dispatch).toHaveBeenLastCalledWith(expectedAction);
     expect(res).toBe(true);

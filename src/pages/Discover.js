@@ -15,13 +15,14 @@ const pause = () => ({
 
 // subcomponents
 
-const Fabs = pure(({playing, next, prev, play, pause}) => (
+const Fabs = pure(({ playing, next, prev, play, pause }) => (
   <div className="control-container">
     <Fab kind="skip_previous" onClick={prev} />
-    { playing
-    ? <Fab kind="pause" large onClick={pause} />
-    : <Fab kind="play_arrow" large onClick={play} />
-    }
+    {playing ? (
+      <Fab kind="pause" large onClick={pause} />
+    ) : (
+      <Fab kind="play_arrow" large onClick={play} />
+    )}
     <Fab kind="skip_next" onClick={next} />
   </div>
 ));
@@ -33,7 +34,7 @@ class Discover extends Component {
     super(props);
     this.state = {
       playing: false
-    }
+    };
   }
 
   showNextPerson = () => {

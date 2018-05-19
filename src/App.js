@@ -10,8 +10,9 @@ import Spinner from './components/Spinner';
 
 class App extends Component {
   componentDidMount() {
-    this.props.loadPeople()
-    .then(success => !success && alert('could not load people :('));
+    this.props
+      .loadPeople()
+      .then(success => !success && alert('could not load people :('));
   }
 
   render() {
@@ -22,19 +23,20 @@ class App extends Component {
           <AppBar />
         </header>
         <main>
-          { peopleLoading
-          ? <Spinner />
-          : <Switch>
+          {peopleLoading ? (
+            <Spinner />
+          ) : (
+            <Switch>
               <Route path="/all" component={ListAll} />
               <Route path="/discover" component={Discover} />
               <Route path="/person/:id" component={Person} />
               <Redirect to="/all" />
             </Switch>
-          }
+          )}
         </main>
       </div>
     );
   }
-} 
+}
 
 export default App;
