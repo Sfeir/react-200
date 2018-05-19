@@ -1,19 +1,15 @@
 import React from 'react';
 import './Card.css';
 
-const Card = ({children}) => (
+const Card = ({ children }) => (
   <section className="Card card">
-    <div className="card-content">
-      {children}
-    </div>
-  </section>  
+    <div className="card-content">{children}</div>
+  </section>
 );
 
-const Title = ({subtitle, children}) => (
+const Title = ({ subtitle, children }) => (
   <div className="card-title">
-    <div>
-      {children}
-    </div>
+    <div>{children}</div>
     <div className="card-subtitle">{subtitle}</div>
   </div>
 );
