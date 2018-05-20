@@ -9,7 +9,6 @@ import Person from './pages/Person';
 import AppBar from './components/AppBar';
 import Spinner from './components/Spinner';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,10 +19,10 @@ class App extends Component {
 
   componentDidMount() {
     fetch('/api/people')
-    .then(res => res.json())
-    .then(people => this.setState({ people }));
+      .then(res => res.json())
+      .then(people => this.setState({ people }));
   }
-  
+
   render() {
     const { people } = this.state;
     return (
@@ -32,25 +31,32 @@ class App extends Component {
           <AppBar />
         </header>
         <main>
-          { people === null
-          ? <Spinner />
-          : <Switch>
-              <Route path="/all" render={() =>
-                <ListAll people={people} />
-              } />
-              <Route path="/discover" render={() =>
-                <Discover people={people} />
-              } />
-              <Route path="/person/:id" render={({match}) =>
-                <Person person={people.find(person => person.id === match.params.id)} />
-              } />
+          {people === null ? (
+            <Spinner />
+          ) : (
+            <Switch>
+              <Route path="/all" render={() => <ListAll people={people} />} />
+              <Route
+                path="/discover"
+                render={() => <Discover people={people} />}
+              />
+              <Route
+                path="/person/:id"
+                render={({ match }) => (
+                  <Person
+                    person={people.find(
+                      person => person.id === match.params.id
+                    )}
+                  />
+                )}
+              />
               <Redirect to="/all" />
             </Switch>
-          }
+          )}
         </main>
       </div>
     );
   }
-} 
+}
 
 export default App;

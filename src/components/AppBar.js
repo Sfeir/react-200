@@ -6,9 +6,9 @@ import logo from './AppBar.logo.svg';
 const AppBar = () => (
   <nav className="AppBar">
     <img className="AppBar-logo" src={logo} aria-label="people" alt="People" />
-    <hr className="grow"/>
+    <hr className="grow" />
     <NavLink to="/all">show all</NavLink>
-    <hr/>
+    <hr />
     <NavLink to="/discover">discover</NavLink>
   </nav>
 );

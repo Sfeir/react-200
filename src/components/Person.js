@@ -5,9 +5,16 @@ import Card from './Card';
 
 const Person = ({ person }) => (
   <Card>
-    <Card.Avatar photoUrl={person.photo} altText={`photo of ${person.firstname}`} />
+    <Card.Avatar
+      photoUrl={person.photo}
+      altText={`photo of ${person.firstname}`}
+    />
     <Card.Title
-      mainTitle={<Link to={`/person/${person.id}`}>{person.firstname} {person.lastname}</Link>}
+      mainTitle={
+        <Link to={`/person/${person.id}`}>
+          {person.firstname} {person.lastname}
+        </Link>
+      }
       subTitle={person.entity}
     />
     <Card.Info icon="email">
@@ -16,12 +23,13 @@ const Person = ({ person }) => (
     <Card.Info icon="phone">
       <a href={`tel:${person.phone}`}>{person.phone}</a>
     </Card.Info>
-    { person.manager && person.managerId && (
-      <Card.Info icon="supervisor_account" desc="manager">
-        <Link to={`/person/${person.managerId}`}>{person.manager}</Link>
-      </Card.Info>
-    )}
-  </Card>  
+    {person.manager &&
+      person.managerId && (
+        <Card.Info icon="supervisor_account" desc="manager">
+          <Link to={`/person/${person.managerId}`}>{person.manager}</Link>
+        </Card.Info>
+      )}
+  </Card>
 );
 
 Person.propTypes = {
@@ -36,6 +44,6 @@ Person.propTypes = {
     managerId: PropTypes.string,
     manager: PropTypes.string
   })
-}
+};
 
 export default Person;

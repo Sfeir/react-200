@@ -6,10 +6,7 @@ class Person extends Component {
     const { person } = this.props;
     return (
       <div className="card-container">
-        { person
-        ? <PersonCard person={person} />
-        : "not found :("
-        }
+        {person ? <PersonCard person={person} /> : 'not found :('}
       </div>
     );
   }
