@@ -9,7 +9,7 @@ import Spinner from './components/Spinner';
 const DISCOVER = 'discover';
 const LISTALL = 'show all';
 
-const other = shown => shown === DISCOVER ? LISTALL : DISCOVER;
+const other = shown => (shown === DISCOVER ? LISTALL : DISCOVER);
 const toggleShown = ({ shown }) => ({ shown: other(shown) });
 
 class App extends Component {
@@ -23,30 +23,31 @@ class App extends Component {
 
   componentDidMount() {
     fetch('/api/people')
-    .then(res => res.json())
-    .then(people => this.setState({ people }));
+      .then(res => res.json())
+      .then(people => this.setState({ people }));
   }
 
   toggleShown = () => this.setState(toggleShown);
-  
+
   render() {
     const { shown, people } = this.state;
     return (
       <div className="App">
         <header>
-          <AppBar show={other(shown)} toggleShow={this.toggleShown}/>
+          <AppBar show={other(shown)} toggleShow={this.toggleShown} />
         </header>
         <main>
-          { people === null
-          ? <Spinner />
-          : shown === LISTALL
-          ? <ListAll people={people} />
-          : <Discover people={people} />
-          }
+          {people === null ? (
+            <Spinner />
+          ) : shown === LISTALL ? (
+            <ListAll people={people} />
+          ) : (
+            <Discover people={people} />
+          )}
         </main>
       </div>
     );
   }
-} 
+}
 
 export default App;
