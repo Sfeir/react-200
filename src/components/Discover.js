@@ -8,7 +8,10 @@ const setNext = ({ current }, { people }) => ({
 });
 
 const Fab = ({ kind, large }) => (
-  <a className={`btn-default btn-floating waves-effect waves-light ${large && 'btn-large'}`}>
+  <a
+    className={`btn-default btn-floating waves-effect waves-light ${large &&
+      'btn-large'}`}
+  >
     <i className="material-icons">{kind}</i>
   </a>
 );
@@ -18,7 +21,7 @@ class Discover extends Component {
     super(props);
     this.state = {
       current: 0
-    }
+    };
   }
 
   componentDidMount() {
@@ -28,10 +31,10 @@ class Discover extends Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
-  
+
   render() {
     const { people } = this.props;
-    const { current } = this.state;    
+    const { current } = this.state;
     return (
       <div className="Discover">
         <div className="card-container">
@@ -39,7 +42,7 @@ class Discover extends Component {
         </div>
         <div className="fab-container">
           <Fab kind="skip_next" large />
-        {/*
+          {/*
           bonus: add these Fabs too
           and figure out how to switch between pause and play
           hint: you can interpolate any JS expression
