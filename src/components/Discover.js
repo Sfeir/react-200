@@ -11,7 +11,7 @@ class Discover extends React.Component {
     super(props);
     this.state = {
       current: 0
-    }
+    };
   }
 
   componentDidMount() {
@@ -21,13 +21,11 @@ class Discover extends React.Component {
   componentWillUnmount() {
     clearInterval(this.intervalId);
   }
-  
+
   render() {
     const { people } = this.props;
     const { current } = this.state;
-    return (
-      <Person person={people[current]} />
-    );
+    return <Person person={people[current]} />;
   }
 }
 
