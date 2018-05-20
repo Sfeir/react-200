@@ -10,7 +10,7 @@ import ListAll from './components/ListAll';
 const DISCOVER = 'discover';
 const LISTALL = 'show all';
 
-const other = shown => shown === DISCOVER ? LISTALL : DISCOVER;
+const other = shown => (shown === DISCOVER ? LISTALL : DISCOVER);
 const toggleShown = ({ shown }) => ({ shown: other(shown) });
 
 class App extends Component {
@@ -22,23 +22,24 @@ class App extends Component {
   }
 
   toggleShown = () => this.setState(toggleShown);
-  
+
   render() {
     const { shown } = this.state;
     return (
       <div className="App">
         <header>
-          <AppBar show={other(shown)} toggleShow={this.toggleShown}/>
+          <AppBar show={other(shown)} toggleShow={this.toggleShown} />
         </header>
         <main>
-          { shown === LISTALL
-          ? <ListAll people={PEOPLE} />
-          : <Discover people={PEOPLE} />
-          }
+          {shown === LISTALL ? (
+            <ListAll people={PEOPLE} />
+          ) : (
+            <Discover people={PEOPLE} />
+          )}
         </main>
       </div>
     );
   }
-} 
+}
 
 export default App;
