@@ -11,28 +11,22 @@ const filterPerson = search => {
 
 // state management
 
-const searchChanged = value => () => ({
-  search: value || ''
-});
+class InputState extends Component {
+  state = { value: '' };
+
+  valueChanged = changeEvent =>
+    this.setState({ value: changeEvent.target.value });
+
+  render() {
+    return this.props.children(this.state.value, this.valueChanged);
+  }
+}
 
 // Component
 
-class ListAll extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      search: ''
-    };
-  }
-
-  searchChanged = event => {
-    this.setState(searchChanged(event.target.value));
-  };
-
-  render() {
-    const { people } = this.props;
-    const { search } = this.state;
-    return (
+const ListAll = ({ people }) => (
+  <InputState>
+    {(search, searchChanged) => (
       <Fragment>
         <div className="card-container">
           {people
@@ -44,12 +38,12 @@ class ListAll extends Component {
             id="search"
             label="search by name"
             value={search}
-            onChange={this.searchChanged}
+            onChange={searchChanged}
           />
         </div>
       </Fragment>
-    );
-  }
-}
+    )}
+  </InputState>
+);
 
 export default ListAll;
