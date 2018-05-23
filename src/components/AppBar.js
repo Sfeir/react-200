@@ -1,15 +1,31 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './AppBar.css';
 import logo from './AppBar.logo.svg';
+
+const NavRadioButton = ({ to, children }) => (
+  <Route path={to}>
+    {({ match, history }) => (
+      <label>
+        <input
+          type="radio"
+          name="nav"
+          checked={!!match}
+          onClick={() => !match && history.push(to)}
+        />
+        <span className="white-text">{children}</span>
+      </label>
+    )}
+  </Route>
+);
 
 const AppBar = () => (
   <nav className="AppBar">
     <img className="AppBar-logo" src={logo} aria-label="people" alt="People" />
     <hr className="grow" />
-    <NavLink to="/all">show all</NavLink>
+    <NavRadioButton to="/all">show all</NavRadioButton>
     <hr />
-    <NavLink to="/discover">discover</NavLink>
+    <NavRadioButton to="/discover">discover</NavRadioButton>
   </nav>
 );
 
