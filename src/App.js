@@ -11,14 +11,15 @@ import Person from './pages/Person';
 import AppBar from './components/AppBar';
 import Spinner from './components/Spinner';
 
-const mergeInto = (item, list) => (
+const mergeInto = (item, list) =>
   list.some(li => li.id === item.id)
-  ? list.map(li => li.id === item.id ? item : li)
-  : [item, ...list]
-);
+    ? list.map(li => (li.id === item.id ? item : li))
+    : [item, ...list];
 
 const setPeople = people => () => ({ people });
-const setPerson = person => ({ people }) => ({ people: mergeInto(person, people) })
+const setPerson = person => ({ people }) => ({
+  people: mergeInto(person, people)
+});
 
 class App extends Component {
   constructor(props) {
@@ -29,13 +30,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.loadPeople()
-    .then(success => !success && alert('could not load people :('));
+    this.loadPeople().then(
+      success => !success && alert('could not load people :(')
+    );
   }
 
   loadPeople() {
-    return (
-      fetchPeople()
+    return fetchPeople()
       .then(people => {
         this.setState(setPeople(people));
         return true;
@@ -43,13 +44,11 @@ class App extends Component {
       .catch(e => {
         console.error(e);
         return false;
-      })
-    );
+      });
   }
 
   savePerson(id, partialPerson) {
-    return (
-      updatePerson(id, partialPerson)
+    return updatePerson(id, partialPerson)
       .then(person => {
         this.setState(setPerson(person));
         return true;
@@ -57,8 +56,7 @@ class App extends Component {
       .catch(e => {
         console.error(e);
         return false;
-      })
-    );
+      });
   }
 
   onSave = (id, partial) => this.savePerson(id, partial);
@@ -71,28 +69,33 @@ class App extends Component {
           <AppBar />
         </header>
         <main>
-          { people === null
-          ? <Spinner />
-          : <Switch>
-              <Route path="/all" render={() =>
-                <ListAll people={people} />
-              } />
-              <Route path="/discover" render={() =>
-                <Discover people={people} />
-              } />
-              <Route path="/person/:id" render={({match}) =>
-                <Person
-                  person={people.find(person => person.id === match.params.id)}
-                  onSave={this.onSave}
-                />
-              } />
+          {people === null ? (
+            <Spinner />
+          ) : (
+            <Switch>
+              <Route path="/all" render={() => <ListAll people={people} />} />
+              <Route
+                path="/discover"
+                render={() => <Discover people={people} />}
+              />
+              <Route
+                path="/person/:id"
+                render={({ match }) => (
+                  <Person
+                    person={people.find(
+                      person => person.id === match.params.id
+                    )}
+                    onSave={this.onSave}
+                  />
+                )}
+              />
               <Redirect to="/all" />
             </Switch>
-          }
+          )}
         </main>
       </div>
     );
   }
-} 
+}
 
 export default App;
