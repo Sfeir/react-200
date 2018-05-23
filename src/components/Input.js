@@ -1,6 +1,6 @@
 import React from 'react';
 
-const idForName = (name) => `person-form-${name}`;
+const idForName = name => `person-form-${name}`;
 
 const Input = ({
   name,
@@ -10,7 +10,7 @@ const Input = ({
   onChange,
   disabled,
   isInvalid,
-  errorMessage  
+  errorMessage
 }) => (
   <div className="input-field">
     <input
@@ -27,7 +27,9 @@ const Input = ({
       htmlFor={idForName(name)}
       className={value ? 'active' : undefined}
       data-error={errorMessage}
-    >{label}</label>
+    >
+      {label}
+    </label>
   </div>
 );
 
