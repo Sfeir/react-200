@@ -10,7 +10,10 @@ const reducer = (state = initialState, action) => {
     case 'PEOPLE_RECEIVED':
       return { ...state, people: action.people };
     case 'PERSON_RECEIVED':
-      return { ...state, people: replaceOrPrependById(action.person, state.people) };
+      return {
+        ...state,
+        people: replaceOrPrependById(action.person, state.people)
+      };
     case 'SEARCH_CHANGED':
       return { ...state, search: action.search };
     default:

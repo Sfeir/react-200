@@ -7,7 +7,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  savePerson: (id, partialPerson) => (
+  savePerson: (id, partialPerson) =>
     updatePerson(id, partialPerson)
       .then(person => {
         dispatch({ type: 'PERSON_RECEIVED', person });
@@ -17,9 +17,11 @@ const mapDispatchToProps = dispatch => ({
         console.error(e);
         return false;
       })
-  )
 });
 
-const enhance = connect(mapStateToProps, mapDispatchToProps);
+const enhance = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 
 export default enhance(Person);

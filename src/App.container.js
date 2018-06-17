@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadPeople: () => (
+  loadPeople: () =>
     fetchPeople()
       .then(people => {
         dispatch({ type: 'PEOPLE_RECEIVED', people });
@@ -20,12 +20,14 @@ const mapDispatchToProps = dispatch => ({
         console.error(e);
         return false;
       })
-  )
 });
 
 const enhance = compose(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 );
 
 export default enhance(App);

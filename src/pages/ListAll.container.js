@@ -17,11 +17,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  searchChanged: event => dispatch({ type: 'SEARCH_CHANGED', search: event.target.value })
+  searchChanged: event =>
+    dispatch({ type: 'SEARCH_CHANGED', search: event.target.value })
 });
 
 const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withFilteredPeople
 );
 
