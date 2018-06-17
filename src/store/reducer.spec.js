@@ -1,4 +1,4 @@
-import { freeze } from '../utils'
+import { freeze } from '../utils';
 import reducer from './reducer';
 
 describe('reducer', () => {
@@ -15,7 +15,7 @@ describe('reducer', () => {
   const populatedState = freeze({
     people: testPeople
   });
-  
+
   it('should initialize state with people set to an empty array', () => {
     const actualState = reducer(undefined, {});
     expect(actualState).toEqual(emptyState);
@@ -38,11 +38,13 @@ describe('reducer', () => {
     };
 
     const actualState = reducer(populatedState, action);
-    
-    const {people: [first, , third]} = populatedState;
+
+    const {
+      people: [first, , third]
+    } = populatedState;
     expect(actualState).toEqual({
       people: [first, action.person, third]
-    });    
+    });
   });
 
   it('should prepend the received person on PERSON_RECEIVED when it does not exist', () => {

@@ -21,21 +21,24 @@ const withFilteredPeople = withProps(props => ({
   filteredPeople: props.people.filter(filterPerson(props.search))
 }));
 
-const enhance = compose(withSearchState, withFilteredPeople);
+const enhance = compose(
+  withSearchState,
+  withFilteredPeople
+);
 
 // Component
 
 const ListAll = ({ filteredPeople, search, searchChanged }) => (
   <Fragment>
     <div className="card-container">
-      { filteredPeople
-        .map(person => 
-          <PersonCard person={person} key={person.id} />
-        )
-      }
+      {filteredPeople.map(person => (
+        <PersonCard person={person} key={person.id} />
+      ))}
     </div>
     <div className="control-container">
-      <SearchInput id="search" label="search by name"
+      <SearchInput
+        id="search"
+        label="search by name"
         value={search}
         onChange={searchChanged}
       />
