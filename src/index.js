@@ -17,6 +17,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-addValidationRule('isFrenchPhoneNumber', (_, value) => (
+addValidationRule('isFrenchPhoneNumber', (_, value) =>
   /^0[0-9]{9}$/.test(value)
-));
+);

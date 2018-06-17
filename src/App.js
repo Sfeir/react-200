@@ -10,8 +10,9 @@ import Spinner from './components/Spinner';
 
 class App extends Component {
   componentDidMount() {
-    this.props.loadPeople()
-    .then(success => !success && alert('could not load people :('));
+    this.props
+      .loadPeople()
+      .then(success => !success && alert('could not load people :('));
   }
 
   render() {
@@ -22,28 +23,33 @@ class App extends Component {
           <AppBar />
         </header>
         <main>
-          { people.length === 0
-          ? <Spinner />
-          : <Switch>
-              <Route path="/all" render={() =>
-                <ListAll people={people} />
-              } />
-              <Route path="/discover" render={() =>
-                <Discover people={people} />
-              } />
-              <Route path="/person/:id" render={({match}) =>
-                <Person
-                  person={people.find(person => person.id === match.params.id)}
-                  onSave={savePerson}
-                />
-              } />
+          {people.length === 0 ? (
+            <Spinner />
+          ) : (
+            <Switch>
+              <Route path="/all" render={() => <ListAll people={people} />} />
+              <Route
+                path="/discover"
+                render={() => <Discover people={people} />}
+              />
+              <Route
+                path="/person/:id"
+                render={({ match }) => (
+                  <Person
+                    person={people.find(
+                      person => person.id === match.params.id
+                    )}
+                    onSave={savePerson}
+                  />
+                )}
+              />
               <Redirect to="/all" />
             </Switch>
-          }
+          )}
         </main>
       </div>
     );
   }
-} 
+}
 
 export default App;
