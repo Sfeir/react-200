@@ -28,7 +28,7 @@
   background-color: rgba(250, 250, 250, 0.95);
   display: flex;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
 }
 
 .App .input-field > .material-icons.prefix {
@@ -36,39 +36,37 @@
   color: #9e9e9e;
 }
 
-.App .input-field > input[type=text] {
+.App .input-field > input[type='text'] {
   font-size: 20px;
   font-weight: 300;
 }
 
-.App .input-field > input[type=text]:not(.browser-default):focus:not([readonly]) + label {
-  color: #0168AB;
+.App
+  .input-field
+  > input[type='text']:not(.browser-default):focus:not([readonly]):not(.invalid)
+  + label {
+  color: #0168ab;
 }
 
 .App .input-field > .prefix.active {
-  color: #0168AB;
+  color: #0168ab;
 }
 
-.App .input-field input[type=text]:focus:not(.invalid) {
-  border-bottom: 1px solid #0168AB;
-  box-shadow: 0 1px 0 0 #0168AB;
+.App .input-field input[type='text']:focus:not(.invalid) {
+  border-bottom: 1px solid #0168ab;
+  box-shadow: 0 1px 0 0 #0168ab;
+}
+
+.App .input-field .helper-text::after {
+  top: -8px;
 }
 
 .App .btn-default {
-  background-color: #0168AB;
+  background-color: #0168ab;
 }
 
 .App .btn-default:hover {
-  background-color: #0168AB;
-  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
-}
-
-/****************************/
-
-.App .input-field label {
-  right: 0;
-}
-
-.App input[type=text] + label:after {
-  right: 0;
+  background-color: #0168ab;
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
 }
