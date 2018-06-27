@@ -23,13 +23,10 @@ const Input = ({
       className={isInvalid ? 'invalid' : undefined}
       autoComplete="off"
     />
-    <label
-      htmlFor={idForName(name)}
-      className={value ? 'active' : undefined}
-      data-error={errorMessage}
-    >
+    <label htmlFor={idForName(name)} className={value ? 'active' : undefined}>
       {label}
     </label>
+    <span className="helper-text" data-error={errorMessage} />
   </div>
 );
 
