@@ -15,7 +15,10 @@ const mapDispatchToProps = dispatch => ({
 
 const enhance = compose(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 );
 
 export default enhance(App);

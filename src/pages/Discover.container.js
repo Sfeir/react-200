@@ -11,6 +11,9 @@ const mapDispatchToProps = {
   showPrev: () => discoverPrev()
 };
 
-const enhance = connect(mapStateToProps, mapDispatchToProps);
+const enhance = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 
 export default enhance(Discover);

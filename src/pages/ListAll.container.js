@@ -11,6 +11,9 @@ const mapDispatchToProps = dispatch => ({
   searchChanged: event => dispatch(searchChanged(event.target.value))
 });
 
-const enhance = connect(mapStateToProps, mapDispatchToProps);
+const enhance = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 
 export default enhance(ListAll);
