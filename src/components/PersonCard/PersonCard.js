@@ -7,9 +7,9 @@ const PersonCard = ({ person, onEdit }) => (
   <Card
     actions={
       onEdit && [
-        <a href onClick={onEdit} key="edit">
+        <button className="btn btn-link" onClick={onEdit} key="edit">
           edit
-        </a>
+        </button>
       ]
     }
   >

@@ -96,9 +96,9 @@ class PersonForm extends Component {
             >
               save
             </button>,
-            <a href onClick={onDone} key="cancel">
+            <button className="btn btn-link" onClick={onDone} key="cancel">
               cancel
-            </a>
+            </button>
           ]}
         >
           <Card.Title mainTitle={title} />
