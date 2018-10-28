@@ -96,7 +96,7 @@ class PersonForm extends Component {
             >
               save
             </button>,
-            <a onClick={onDone} key="cancel">
+            <a href onClick={onDone} key="cancel">
               cancel
             </a>
           ]}
