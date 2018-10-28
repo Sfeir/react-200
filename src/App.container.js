@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 
 import { peopleRequested, getPersonCount } from './store';
@@ -13,12 +12,9 @@ const mapDispatchToProps = dispatch => ({
   loadPeople: () => dispatch(peopleRequested())
 });
 
-const enhance = compose(
-  withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+const connectApp = connect(
+  mapStateToProps,
+  mapDispatchToProps
 );
 
-export default enhance(App);
+export default withRouter(connectApp(App));
