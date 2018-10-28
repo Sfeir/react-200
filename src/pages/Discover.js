@@ -1,21 +1,10 @@
-import React, { Component, Fragment } from 'react';
-import { pure } from 'recompose';
+import React, { memo, useState, useEffect, useCallback } from 'react';
 import PersonCard from '../components/PersonCard';
 import Fab from '../components/Fab';
 
-// state management
-
-const play = () => ({
-  playing: true
-});
-
-const pause = () => ({
-  playing: false
-});
-
 // subcomponents
 
-const Fabs = pure(({ playing, next, prev, play, pause }) => (
+const Fabs = memo(({ playing, next, prev, play, pause }) => (
   <div className="control-container">
     <Fab kind="skip_previous" onClick={prev} />
     {playing ? (
@@ -29,55 +18,39 @@ const Fabs = pure(({ playing, next, prev, play, pause }) => (
 
 // container
 
-class Discover extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      playing: false
-    };
-  }
+const Discover = ({ current, showNext, showPrev }) => {
+  const [playing, setPlaying] = useState(false);
 
-  showNextPerson = () => {
-    this.props.showNext();
-  };
+  useEffect(
+    () => {
+      if (playing) {
+        const iid = setInterval(showNext, 2000);
+        return () => clearInterval(iid);
+      }
+    },
+    [playing]
+  );
 
-  showPreviousPerson = () => {
-    this.props.showPrev();
-  };
+  const play = useCallback(() => {
+    showNext();
+    setPlaying(true);
+  }, []);
+  const pause = useCallback(() => setPlaying(false), []);
 
-  play = () => {
-    this.intervalId = setInterval(this.showNextPerson, 2000);
-    this.showNextPerson();
-    this.setState(play);
-  };
-
-  pause = () => {
-    clearInterval(this.intervalId);
-    this.setState(pause);
-  };
-
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-  }
-
-  render() {
-    const { current } = this.props;
-    const { playing } = this.state;
-    return (
-      <Fragment>
-        <div className="card-container">
-          <PersonCard id={current} />
-        </div>
-        <Fabs
-          playing={playing}
-          next={this.showNextPerson}
-          prev={this.showPreviousPerson}
-          play={this.play}
-          pause={this.pause}
-        />
-      </Fragment>
-    );
-  }
-}
+  return (
+    <>
+      <div className="card-container">
+        <PersonCard id={current} />
+      </div>
+      <Fabs
+        playing={playing}
+        next={showNext}
+        prev={showPrev}
+        play={play}
+        pause={pause}
+      />
+    </>
+  );
+};
 
 export default Discover;
