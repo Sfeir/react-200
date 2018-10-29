@@ -21,15 +21,12 @@ const Fabs = memo(({ playing, next, prev, play, pause }) => (
 const Discover = ({ current, showNext, showPrev }) => {
   const [playing, setPlaying] = useState(false);
 
-  useEffect(
-    () => {
-      if (playing) {
-        const iid = setInterval(showNext, 2000);
-        return () => clearInterval(iid);
-      }
-    },
-    [playing]
-  );
+  useEffect(() => {
+    if (playing) {
+      const tid = setTimeout(showNext, 2000);
+      return () => clearTimeout(tid);
+    }
+  });
 
   const play = useCallback(() => {
     showNext();
