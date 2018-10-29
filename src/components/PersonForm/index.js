@@ -1,3 +1,4 @@
-import PersonForm from './PersonForm.container';
+import PersonForm from './PersonForm';
+import connect from './PersonForm.container';
 
-export default PersonForm;
+export default connect(PersonForm);
