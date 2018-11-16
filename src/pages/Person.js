@@ -2,11 +2,17 @@ import React, { useState, useCallback } from 'react';
 import PersonCard from '../components/PersonCard';
 import PersonForm from '../components/PersonForm';
 
-const Person = ({ id, personExists }) => {
+const useEditing = () => {
   const [editing, setEditing] = useState(false);
 
   const beginEdit = useCallback(() => setEditing(true));
   const endEdit = useCallback(() => setEditing(false));
+
+  return [editing, beginEdit, endEdit];
+};
+
+const Person = ({ id, personExists }) => {
+  const [editing, beginEdit, endEdit] = useEditing();
 
   const renderCardOrForm = () => {
     if (editing) {

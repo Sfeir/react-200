@@ -18,22 +18,28 @@ const Fabs = memo(({ playing, next, prev, play, pause }) => (
 
 // container
 
-const Discover = ({ current, showNext, showPrev }) => {
+const usePlaying = showNext => {
   const [playing, setPlaying] = useState(false);
-
   useEffect(() => {
     if (playing) {
       const tid = setTimeout(showNext, 2000);
       return () => clearTimeout(tid);
     }
   });
-
   const play = useCallback(() => {
     showNext();
     setPlaying(true);
   }, []);
   const pause = useCallback(() => setPlaying(false), []);
+  return { playing, play, pause };
+};
 
+const Discover = ({
+  current,
+  showNext,
+  showPrev,
+  fromUsePlaying: { playing, play, pause } = usePlaying(showNext)
+}) => {
   return (
     <>
       <div className="card-container">
